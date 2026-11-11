@@ -21,29 +21,102 @@ import { pluralize } from "@notesnook/common";
 import { tryParse } from "./parse";
 
 const DRAG_MIME_TYPE = "application/vnd.notesnook.items";
+const DROP_TARGET_ACTIVE = "data-drop-active";
+let isDraggingItems = false;
+let activeDropTarget: Element | null = null;
+let dropHighlighterInstalled = false;
+
+function setActiveDropTarget(target: Element | null) {
+  if (target === activeDropTarget) return;
+  activeDropTarget?.removeAttribute(DROP_TARGET_ACTIVE);
+  activeDropTarget = target;
+  activeDropTarget?.setAttribute(DROP_TARGET_ACTIVE, "true");
+}
+
+function endItemsDrag() {
+  isDraggingItems = false;
+  document.body.classList.remove("nn-dragging-items");
+  setActiveDropTarget(null);
+}
+
+/**
+ * Highlights the element under the pointer that accepts dropped items
+ * (marked with `data-drop-target`) using the app's accent colour, instead of
+ * leaving the browser's plain drag feedback as the only cue.
+ */
+function installDropHighlighter() {
+  if (dropHighlighterInstalled) return;
+  dropHighlighterInstalled = true;
+  document.addEventListener(
+    "dragover",
+    (e) => {
+      if (!isDraggingItems) return;
+      const target =
+        e.target instanceof Element
+          ? e.target.closest("[data-drop-target]")
+          : null;
+      setActiveDropTarget(target);
+    },
+    true
+  );
+  document.addEventListener(
+    "dragleave",
+    (e) => {
+      if (!isDraggingItems) return;
+      // left the window
+      if (!e.relatedTarget) setActiveDropTarget(null);
+    },
+    true
+  );
+  document.addEventListener("drop", endItemsDrag, true);
+  document.addEventListener("dragend", endItemsDrag, true);
+}
+
 export function setDragData(
   dataTransfer: DataTransfer,
   type: string,
-  ids: string[]
+  ids: string[],
+  title?: string
 ) {
-  const dragImage = document.createElement("div");
-  dragImage.classList.add("theme-scope-base");
-  dragImage.style.position = "absolute";
-  dragImage.style.top = "-1000px";
-  dragImage.style.backgroundColor = "var(--background)";
-  dragImage.style.color = "var(--paragraph)";
-  dragImage.style.fontSize = "16px";
-  dragImage.style.border = "1px solid var(--border)";
-  dragImage.style.borderRadius = "5px";
-  dragImage.style.paddingLeft = "5px";
-  dragImage.style.paddingRight = "5px";
+  installDropHighlighter();
 
-  dragImage.textContent = pluralize(ids.length, "item");
+  // An app-styled drag preview: a small card with the item's title and a
+  // count badge, using the theme's colours (works in light & dark themes).
+  const dragImage = document.createElement("div");
+  dragImage.classList.add("theme-scope-base", "nn-drag-preview");
+
+  const accentBar = document.createElement("span");
+  accentBar.className = "nn-drag-preview-bar";
+  dragImage.appendChild(accentBar);
+
+  const label = document.createElement("span");
+  label.className = "nn-drag-preview-title";
+  label.textContent =
+    title && ids.length === 1
+      ? title
+      : pluralize(
+          ids.length,
+          (["note", "notebook", "tag", "reminder"].includes(type)
+            ? type
+            : "item") as Parameters<typeof pluralize>[1]
+        );
+  dragImage.appendChild(label);
+
+  if (ids.length > 1) {
+    const badge = document.createElement("span");
+    badge.className = "nn-drag-preview-badge";
+    badge.textContent = String(ids.length);
+    dragImage.appendChild(badge);
+  }
 
   document.body.appendChild(dragImage);
-  dataTransfer.setDragImage(dragImage, -10, 0);
+  dataTransfer.effectAllowed = "copyMove";
+  dataTransfer.setDragImage(dragImage, 12, 18);
 
   dataTransfer.setData(DRAG_MIME_TYPE, JSON.stringify({ type: type, ids }));
+
+  isDraggingItems = true;
+  document.body.classList.add("nn-dragging-items");
 
   setTimeout(() => {
     dragImage.remove();

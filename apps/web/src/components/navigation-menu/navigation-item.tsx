@@ -61,6 +61,9 @@ function NavigationItem(
   return (
     <Flex
       {...restProps}
+      data-drop-target={
+        (restProps as { onDrop?: unknown }).onDrop ? true : undefined
+      }
       ref={containerRef}
       onDragOver={(e) => {
         e.preventDefault();

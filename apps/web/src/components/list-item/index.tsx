@@ -107,6 +107,7 @@ function ListItem<TItem extends Item, TContext>(
       className={isSelected ? "selected" : ""}
       ref={listItemRef}
       draggable={draggable}
+      data-drop-target={onDrop ? true : undefined}
       onDragEnter={onDragEnter}
       onDrop={onDrop}
       onDragOver={(e) => e.preventDefault()}
@@ -119,7 +120,14 @@ function ListItem<TItem extends Item, TContext>(
           selectedItems = [];
           selectedItems.push(item.id);
         }
-        setDragData(e.dataTransfer, item.type, selectedItems);
+        setDragData(
+          e.dataTransfer,
+          item.type,
+          selectedItems,
+          "title" in item && typeof item.title === "string"
+            ? item.title
+            : undefined
+        );
       }}
       onContextMenu={async (e) => {
         e.preventDefault();

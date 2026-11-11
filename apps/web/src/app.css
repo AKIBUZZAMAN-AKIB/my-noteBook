@@ -248,3 +248,55 @@ kbd {
     opacity: 1;
   }
 }
+
+/* ---- App-styled drag & drop (notes -> notebooks / tags / sidebar) ---- */
+.nn-drag-preview {
+  position: absolute;
+  top: -1000px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 260px;
+  padding: 8px 12px 8px 0;
+  background-color: var(--background);
+  color: var(--heading);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  font-family: var(--font-family, inherit);
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.nn-drag-preview-bar {
+  align-self: stretch;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background-color: var(--accent);
+  flex-shrink: 0;
+}
+.nn-drag-preview-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.nn-drag-preview-badge {
+  flex-shrink: 0;
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background-color: var(--accent);
+  color: var(--accentForeground, #fff);
+  font-size: 11px;
+  text-align: center;
+}
+body.nn-dragging-items [data-drop-target] {
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+body.nn-dragging-items [data-drop-target][data-drop-active] {
+  background-color: color-mix(in srgb, var(--accent) 14%, transparent) !important;
+  box-shadow: inset 0 0 0 2px var(--accent);
+  border-radius: 6px;
+}
