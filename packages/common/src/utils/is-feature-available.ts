@@ -721,11 +721,30 @@ export async function getFeaturesUsage(): Promise<FeatureUsage[]> {
   return usage;
 }
 
+/**
+ * SELF-HOSTED LOCAL BUILD PATCH:
+ * Every client-side feature gate is evaluated as the highest tier, so all
+ * local/offline features are available. Features that depend on Notesnook's
+ * official servers (cloud storage quota, upload size, SMS 2FA, Circle partner
+ * codes, Monograph publishing/analytics) keep the account's real plan,
+ * because those limits are enforced server-side and are not touched here.
+ */
+const SERVER_ENFORCED_FEATURES: string[] = [
+  "storage",
+  "fileSize",
+  "sms2FA",
+  "notesnookCircle",
+  "monographLinksAndEmbeds",
+  "monographAnalytics"
+];
+
 function getFeatureLimitFromPlan<TId extends FeatureId>(
   feature: Feature<TId>,
   plan: SubscriptionPlan
 ): Limit<Caption<TId>> {
-  const key = PLAN_TO_AVAILABILITY[plan];
+  const key = SERVER_ENFORCED_FEATURES.includes(feature.id)
+    ? PLAN_TO_AVAILABILITY[plan]
+    : "believer";
   return feature.availability[key] as unknown as Limit<Caption<TId>>;
 }
 
