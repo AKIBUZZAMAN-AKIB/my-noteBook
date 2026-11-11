@@ -24,6 +24,29 @@ declare const self: ServiceWorkerGlobalScope & typeof globalThis;
 
 self.addEventListener("activate", () => self.clients.claim());
 
+// Reminder notifications are shown through the service worker on phones
+// (Android Chrome does not allow `new Notification()`). Clicking one focuses
+// the app and asks it to open the reminder.
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const reminderId = event.notification.data?.reminderId;
+  event.waitUntil(
+    (async () => {
+      const windows = await self.clients.matchAll({
+        type: "window",
+        includeUncontrolled: true
+      });
+      const client = windows[0];
+      if (client) {
+        await client.focus().catch(() => undefined);
+        if (reminderId) client.postMessage({ type: "OPEN_REMINDER", reminderId });
+      } else {
+        await self.clients.openWindow(self.registration.scope);
+      }
+    })()
+  );
+});
+
 const downloads = new Map<string, any[]>();
 
 // This allows the web app to trigger skipWaiting via

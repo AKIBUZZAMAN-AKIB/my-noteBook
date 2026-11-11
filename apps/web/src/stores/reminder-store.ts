@@ -120,6 +120,8 @@ function scheduleReminder(id: string, reminder: Reminder, cron: string) {
         await desktop?.integration.bringToFront.query();
         await ReminderPreviewDialog.show({ reminder });
       }
+    } else if (await showServiceWorkerNotification(id, reminder)) {
+      // shown by the service worker (required on Android)
     } else {
       const notification = new Notification(reminder.title, {
         body: reminder.description,
@@ -176,4 +178,35 @@ function reminderToCronExpression(reminder: Reminder) {
     }
     return cron.join(" ");
   }
+}
+
+async function showServiceWorkerNotification(id: string, reminder: Reminder) {
+  try {
+    if (!("serviceWorker" in navigator)) return false;
+    if (typeof Notification === "undefined") return false;
+    if (Notification.permission !== "granted") return false;
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) return false;
+    await registration.showNotification(reminder.title, {
+      body: reminder.description,
+      silent: reminder.priority === "silent",
+      tag: id,
+      requireInteraction: true,
+      icon: "/android-chrome-192x192.png",
+      badge: "/favicon.png",
+      data: { reminderId: reminder.id }
+    });
+    return true;
+  } catch (e) {
+    console.error("Could not show reminder notification", e);
+    return false;
+  }
+}
+
+if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
+  navigator.serviceWorker.addEventListener("message", async (event) => {
+    if (event.data?.type !== "OPEN_REMINDER") return;
+    const reminder = await db.reminders.reminder(event.data.reminderId);
+    if (reminder) ReminderPreviewDialog.show({ reminder });
+  });
 }

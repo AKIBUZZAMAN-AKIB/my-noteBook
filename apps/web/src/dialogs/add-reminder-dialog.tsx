@@ -290,9 +290,6 @@ export const AddReminderDialog = DialogManager.register(
                 }}
               />
               {strings.reminderModes(m.id)}
-              {m.id === "repeat" && !repeatModeAvailability?.isAllowed && (
-                <Pro size={18} color="accent" sx={{ ml: 1 }} />
-              )}
             </Label>
           ))}
         </Flex>
