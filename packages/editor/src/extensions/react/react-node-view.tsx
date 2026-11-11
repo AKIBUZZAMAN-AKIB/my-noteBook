@@ -271,12 +271,17 @@ export class ReactNodeView<P extends ReactNodeViewProps> implements NodeView {
       });
     }
 
-    // temporary border around the dragged element for better identification
-    (dragImage as HTMLElement).style.border =
-      "2px solid var(--paragraph, var(--nn_primary_paragraph))";
-    setTimeout(function () {
-      (dragImage as HTMLElement).style.border = "none";
-    });
+    // mark the element that is being moved (dimmed, accent outline) until
+    // the drag ends, instead of the old 1-frame plain border
+    const source = dragImage as HTMLElement;
+    source.classList.add("node-dragging");
+    const clearDragging = () => {
+      source.classList.remove("node-dragging");
+      document.removeEventListener("dragend", clearDragging, true);
+      document.removeEventListener("drop", clearDragging, true);
+    };
+    document.addEventListener("dragend", clearDragging, true);
+    document.addEventListener("drop", clearDragging, true);
 
     let x = 0;
     let y = 0;
@@ -309,7 +314,16 @@ export class ReactNodeView<P extends ReactNodeViewProps> implements NodeView {
     view.dispatch(transaction);
 
     forceHandleDrag(event, this.editor);
-    event.dataTransfer?.setDragImage(dragImage, x, y);
+    const preview = createNodeDragPreview(source);
+    if (preview) {
+      const scale = preview.scale;
+      event.dataTransfer?.setDragImage(
+        preview.element,
+        Math.min(x * scale + 6, preview.element.offsetWidth - 4),
+        Math.min(y * scale + 6, preview.element.offsetHeight - 4)
+      );
+      setTimeout(() => preview.element.remove());
+    } else event.dataTransfer?.setDragImage(dragImage, x, y);
   }
 
   stopEvent(event: Event): boolean {
@@ -518,5 +532,52 @@ function forceHandleDrag(event: DragEvent, editor: Editor) {
   // a small workaround to identity when a nodeView is being dragged
   if (isAndroid || isiOS) {
     (view.dragging as any).nodeView = true;
+  }
+}
+
+const DRAG_PREVIEW_MAX_WIDTH = 240;
+const DRAG_PREVIEW_MAX_HEIGHT = 180;
+const DRAG_PREVIEW_MAX_CROP_WIDTH = 320;
+/**
+ * Builds an app-styled drag preview (themed card with a shadow) out of a
+ * copy of the node, scaled down so big images don't cover the whole screen.
+ * Falls back to the browser's default preview if anything goes wrong.
+ */
+function createNodeDragPreview(source: HTMLElement) {
+  try {
+    const rect = source.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    // tall blocks (images) are scaled down to fit; wide & short blocks
+    // (tasks, attachments) keep a readable size and are cropped instead
+    const scale = Math.min(
+      1,
+      DRAG_PREVIEW_MAX_HEIGHT / rect.height,
+      Math.max(0.75, DRAG_PREVIEW_MAX_WIDTH / rect.width)
+    );
+    const element = document.createElement("div");
+    element.className = "drag-preview node-drag-preview";
+    element.style.top = "-10000px";
+    element.style.left = "0px";
+    element.style.width = `${
+      Math.min(Math.round(rect.width * scale), DRAG_PREVIEW_MAX_CROP_WIDTH) + 12
+    }px`;
+    element.style.height = `${Math.round(rect.height * scale) + 12}px`;
+
+    const clone = source.cloneNode(true) as HTMLElement;
+    clone.classList.remove("node-dragging");
+    clone.style.width = `${rect.width}px`;
+    clone.style.height = `${rect.height}px`;
+    clone.style.margin = "0";
+    clone.style.transform = `scale(${scale})`;
+    clone.style.transformOrigin = "top left";
+    clone.style.pointerEvents = "none";
+    element.appendChild(clone);
+
+    (source.closest(".ProseMirror")?.parentElement || document.body).appendChild(
+      element
+    );
+    return { element, scale };
+  } catch {
+    return;
   }
 }
