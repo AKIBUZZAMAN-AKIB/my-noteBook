@@ -61,12 +61,18 @@ export function VirtualizedList<T, C>(props: VirtualizedListProps<T, C>) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [measuredOffset, setMeasuredOffset] = useState(0);
+  const measuredOffsetRef = useRef(0);
 
+  // Runs after every commit: only update state when the offset really changed,
+  // otherwise every commit queues another synchronous re-render and a burst of
+  // virtualizer measurements can hit React's nested update limit (#185).
   useLayoutEffect(() => {
     if (scrollMargin !== undefined) return;
     if (containerRef.current) {
       const offset = containerRef.current.offsetTop || 0;
-      setMeasuredOffset((prev) => (prev !== offset ? offset : prev));
+      if (offset === measuredOffsetRef.current) return;
+      measuredOffsetRef.current = offset;
+      setMeasuredOffset(offset);
     }
   });
 

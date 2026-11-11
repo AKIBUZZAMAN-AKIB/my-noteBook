@@ -50,13 +50,24 @@ export function VirtualizedGrid<T>(props: VirtualizedGridProps<T>) {
   } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const [measuredOffset, setMeasuredOffset] = useState(0);
+  const measuredOffsetRef = useRef(0);
 
+  // This effect runs after every commit. Only schedule a state update when the
+  // offset has really changed: calling setState unconditionally here queues a
+  // synchronous re-render on every commit, and while the virtualizer is
+  // measuring newly mounted rows (e.g. a fast fling on a phone) those chained
+  // commits exceed React's nested update limit (Minified React error #185).
   useLayoutEffect(() => {
     if (scrollMargin !== undefined) return;
-    if (containerRef.current) {
-      const offset = containerRef.current.offsetTop || 0;
-      setMeasuredOffset((prev) => (prev !== offset ? offset : prev));
-    }
+    const container = containerRef.current;
+    if (!container) return;
+    const offset = getOffsetInScrollElement(
+      container,
+      scrollElement || container.closest(".ms-container")
+    );
+    if (offset === measuredOffsetRef.current) return;
+    measuredOffsetRef.current = offset;
+    setMeasuredOffset(offset);
   });
 
   const virtualizer = useVirtualizer({
@@ -126,5 +137,23 @@ export function VirtualizedGrid<T>(props: VirtualizedGridProps<T>) {
         ))}
       </Box>
     </Box>
+  );
+}
+
+/**
+ * Distance (in px) from the top of the scroll element's content to the top of
+ * `element`. `offsetTop` is relative to the nearest positioned ancestor, which
+ * is not always the scroll element (e.g. it can be the dialog), so it would
+ * include headers that live outside the scrolling area.
+ */
+function getOffsetInScrollElement(
+  element: HTMLElement,
+  scrollElement: Element | null
+) {
+  if (!scrollElement) return element.offsetTop || 0;
+  return Math.round(
+    element.getBoundingClientRect().top -
+      scrollElement.getBoundingClientRect().top +
+      scrollElement.scrollTop
   );
 }

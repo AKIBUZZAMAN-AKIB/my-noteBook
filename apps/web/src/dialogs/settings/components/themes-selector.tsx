@@ -120,7 +120,12 @@ function ThemesList() {
       previewColors: getPreviewColors(lightTheme)
     },
     ...(themes.data?.pages.flatMap((a) => a.themes) || [])
-  ];
+  ].filter(
+    // The themes server can return the same theme on more than one page.
+    // Duplicate ids become duplicate React/virtualizer keys, which breaks
+    // measuring and reconciliation of the grid, so keep the first occurrence.
+    (theme, index, all) => all.findIndex((t) => t.id === theme.id) === index
+  );
 
   const setTheme = useCallback(
     async (theme: ThemeMetadata) => {
