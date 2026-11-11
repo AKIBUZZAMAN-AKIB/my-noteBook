@@ -25,7 +25,6 @@ import React, {
   PropsWithChildren
 } from "react";
 import { Box, FlexProps, Text } from "@theme-ui/components";
-import { getPosition } from "../../utils/position.js";
 import { LazyMenuItemsLoader, MenuButtonItem, MenuItem } from "./types.js";
 import { useFocus } from "./use-focus.js";
 import { MenuSeparator } from "./menu-separator.js";
@@ -84,10 +83,10 @@ export function Menu(props: MenuProps) {
     function repositionSubmenu() {
       if (!subMenuRef.current || !menuItemElement) return;
 
-      const { top, left } = getPosition(subMenuRef.current, {
-        target: menuItemElement,
-        location: "right"
-      });
+      const { top, left } = getSubmenuPosition(
+        subMenuRef.current,
+        menuItemElement
+      );
       subMenuRef.current.style.top = `${top}px`;
       subMenuRef.current.style.left = `${left}px`;
     }
@@ -175,6 +174,56 @@ export function Menu(props: MenuProps) {
       )}
     </>
   );
+}
+
+const VIEWPORT_MARGIN = 8;
+/**
+ * Places a submenu next to its parent item while keeping it fully inside
+ * the viewport:
+ * 1. to the right of the item when it fits (default, desktop behaviour)
+ * 2. otherwise to the left of the parent menu
+ * 3. otherwise (narrow phone screens) stacked just below the item,
+ *    slightly indented and clamped inside the screen.
+ * The returned position is relative to the submenu's offset parent.
+ */
+function getSubmenuPosition(submenu: HTMLElement, item: HTMLElement) {
+  const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+  const viewportHeight =
+    document.documentElement.clientHeight || window.innerHeight;
+  const itemRect = item.getBoundingClientRect();
+  const parentMenu = item.closest(".menuContainer");
+  const menuRect = parentMenu ? parentMenu.getBoundingClientRect() : itemRect;
+  const offsetParent = (submenu.offsetParent as HTMLElement) || document.body;
+  const parentRect = offsetParent.getBoundingClientRect();
+
+  const maxHeight = viewportHeight - VIEWPORT_MARGIN * 2;
+  if (submenu.scrollHeight > maxHeight)
+    submenu.style.maxHeight = `${maxHeight}px`;
+  const width = submenu.offsetWidth;
+  const height = Math.min(submenu.offsetHeight, maxHeight);
+
+  let left: number;
+  let top = itemRect.top;
+  if (menuRect.right + width <= viewportWidth - VIEWPORT_MARGIN) {
+    left = menuRect.right;
+  } else if (menuRect.left - width >= VIEWPORT_MARGIN) {
+    left = menuRect.left - width;
+  } else {
+    left = itemRect.left + 16;
+    top = itemRect.bottom;
+  }
+
+  left = Math.min(left, viewportWidth - VIEWPORT_MARGIN - width);
+  left = Math.max(left, VIEWPORT_MARGIN);
+  if (top + height > viewportHeight - VIEWPORT_MARGIN)
+    top = viewportHeight - VIEWPORT_MARGIN - height;
+  top = Math.max(top, VIEWPORT_MARGIN);
+
+  return {
+    left:
+      left - parentRect.left - offsetParent.clientLeft + offsetParent.scrollLeft,
+    top: top - parentRect.top - offsetParent.clientTop + offsetParent.scrollTop
+  };
 }
 
 type MenuContainerProps = FlexProps & {
