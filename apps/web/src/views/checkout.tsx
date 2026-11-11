@@ -168,7 +168,7 @@ function Checkout() {
               <use href="#full-logo" />
             </svg>
             <Text variant="heading" sx={{ fontSize: 20 }}>
-              Notesnook
+              my-NoteBook
             </Text>
           </Flex>
         </a>

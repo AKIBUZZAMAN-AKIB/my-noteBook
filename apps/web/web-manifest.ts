@@ -20,10 +20,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { ManifestOptions } from "vite-plugin-pwa";
 
 export const WEB_MANIFEST: Partial<ManifestOptions> = {
-  name: "Notesnook",
+  name: "my-NoteBook",
   description:
-    "A fully open source & end-to-end encrypted note taking alternative to Evernote.",
-  short_name: "Notesnook",
+    "A private, encrypted notebook that keeps your notes on your device.",
+  short_name: "my-NoteBook",
   shortcuts: [
     {
       name: "New note",
@@ -74,58 +74,10 @@ export const WEB_MANIFEST: Partial<ManifestOptions> = {
       purpose: "maskable"
     }
   ],
-  screenshots: [
-    {
-      src: "/screenshots/screenshot-1.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    },
-    {
-      src: "/screenshots/screenshot-2.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    },
-    {
-      src: "/screenshots/screenshot-3.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    },
-    {
-      src: "/screenshots/screenshot-4.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    },
-    {
-      src: "/screenshots/screenshot-5.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    },
-    {
-      src: "/screenshots/screenshot-6.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    },
-    {
-      src: "/screenshots/screenshot-7.jpg",
-      sizes: "1080x1920",
-      type: "image/jpeg"
-    }
-  ],
-  related_applications: [
-    {
-      platform: "play",
-      url: "https://play.google.com/store/apps/details?id=com.streetwriters.notesnook",
-      id: "com.streetwriters.notesnook"
-    },
-    {
-      platform: "itunes",
-      url: "https://apps.apple.com/us/app/notesnook-private-notes-app/id1544027013"
-    }
-  ],
-  prefer_related_applications: true,
+  prefer_related_applications: false,
   orientation: "any",
   start_url: ".",
-  theme_color: "#01c352",
+  theme_color: "#008837",
   background_color: "#ffffff",
   display: "standalone",
   categories: ["productivity", "lifestyle", "education", "books"]

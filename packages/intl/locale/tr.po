@@ -629,12 +629,12 @@ msgid "{planTitle} plan"
 msgstr "{planTitle} planı"
 
 #: src/strings.ts:676
-msgid "{platform, select, android {{name} saved to selected path} other {{name} saved to File Manager/Notesnook/downloads}}"
-msgstr "{platform, select, android {{name} seçilen konuma kaydedildi} other {{name} File Manager/Notesnook/downloads konumuna kaydedildi}}"
+msgid "{platform, select, android {{name} saved to selected path} other {{name} saved to File Manager/my-NoteBook/downloads}}"
+msgstr "{platform, select, android {{name} seçilen konuma kaydedildi} other {{name} File Manager/my-NoteBook/downloads konumuna kaydedildi}}"
 
 #: src/strings.ts:1236
-msgid "{platform, select, android {Backup file saved in \"Notesnook backups\" folder on your phone.} other {Backup file is saved in File Manager/Notesnook folder}}"
-msgstr "{platform, select, android {Yedek dosyası telefonunuzdaki \"Notesnook backups\" klasörüne kaydedildi.} other {Yedek dosyası File Manager/Notesnook klasörüne kaydedilir}}"
+msgid "{platform, select, android {Backup file saved in \"my-NoteBook backups\" folder on your phone.} other {Backup file is saved in File Manager/my-NoteBook folder}}"
+msgstr "{platform, select, android {Yedek dosyası telefonunuzdaki \"my-NoteBook backups\" klasörüne kaydedildi.} other {Yedek dosyası File Manager/my-NoteBook klasörüne kaydedilir}}"
 
 #: src/strings.ts:2153
 msgid "{selected} selected"
@@ -693,8 +693,8 @@ msgid "/ month"
 msgstr "/ ay"
 
 #: src/strings.ts:1649
-msgid "#notesnook"
-msgstr "#notesnook"
+msgid "#mynotebook"
+msgstr ""
 
 #: src/strings.ts:3267
 msgid "✨ Highlights ✨"
@@ -997,8 +997,8 @@ msgid "All the core features, minus the fluff."
 msgstr "Gereksiz fazlalıklar olmadan tüm temel özellikler."
 
 #: src/strings.ts:1953
-msgid "All the source code for Notesnook is available & open for everyone on GitHub."
-msgstr "Notesnook'un tüm kaynak kodu GitHub'da herkese açıktır."
+msgid "All the source code for my-NoteBook is available & open for everyone on GitHub."
+msgstr "my-NoteBook'un tüm kaynak kodu GitHub'da herkese açıktır."
 
 #: src/strings.ts:385
 msgid "All tools are grouped"
@@ -1013,8 +1013,8 @@ msgid "All tools in this group will be removed from the toolbar."
 msgstr "Bu gruptaki tüm araçlar araç çubuğundan kaldırılacak."
 
 #: src/strings.ts:1251
-msgid "All your backups are stored in 'Phone Storage/Notesnook/backups/' folder"
-msgstr "Tüm yedekleriniz 'Phone Storage/Notesnook/backups/' klasöründe saklanır"
+msgid "All your backups are stored in 'Phone Storage/my-NoteBook/backups/' folder"
+msgstr "Tüm yedekleriniz 'Phone Storage/my-NoteBook/backups/' klasöründe saklanır"
 
 #: src/strings.ts:94
 msgid "Already have an account?"
@@ -1797,8 +1797,8 @@ msgid "Characters"
 msgstr "Karakterler"
 
 #: src/strings.ts:1197
-msgid "Check for new version of Notesnook"
-msgstr "Notesnook'un yeni sürümünü denetle"
+msgid "Check for new version of my-NoteBook"
+msgstr "my-NoteBook'un yeni sürümünü denetle"
 
 #: src/strings.ts:1200
 msgid "Check for new version of the app available on app launch"
@@ -2190,8 +2190,8 @@ msgid "Configure"
 msgstr "Yapılandır"
 
 #: src/strings.ts:2201
-msgid "Configure server URLs for Notesnook"
-msgstr "Notesnook için sunucu adreslerini yapılandır"
+msgid "Configure server URLs for my-NoteBook"
+msgstr "my-NoteBook için sunucu adreslerini yapılandır"
 
 #: src/strings.ts:3001
 msgid "Confirm"
@@ -2773,6 +2773,10 @@ msgstr "Etiketler siliniyor"
 msgid "Description"
 msgstr "Açıklama"
 
+#: src/strings.ts:3286
+msgid "Description is required"
+msgstr ""
+
 #: src/strings.ts:1909
 msgid "Desktop app"
 msgstr "Masaüstü uygulaması"
@@ -2856,8 +2860,8 @@ msgid "Do not worry about losing your data. Turn on automatic backups on weekly 
 msgstr "Verilerinizi kaybetme konusunda endişelenmeyin. Haftalık veya günlük olarak otomatik yedeklemeleri açın."
 
 #: src/strings.ts:246
-msgid "Do you enjoy using Notesnook?"
-msgstr "Notesnook'u kullanmaktan memnun musunuz?"
+msgid "Do you enjoy using my-NoteBook?"
+msgstr "my-NoteBook'u kullanmaktan memnun musunuz?"
 
 #: src/strings.ts:1164
 msgid "Documentation"
@@ -3325,8 +3329,8 @@ msgid "every 5 years"
 msgstr "5 yılda bir"
 
 #: src/strings.ts:3044
-msgid "Everything you do in Notesnook stays private. We use XChaCha20-Poly1305-IETF and Argon2 to encrypt your notes."
-msgstr "Notesnook'ta yaptığınız her şey gizli kalır. Notlarınızı şifrelemek için XChaCha20-Poly1305-IETF ve Argon2 kullanıyoruz."
+msgid "Everything you do in my-NoteBook stays private. We use XChaCha20-Poly1305-IETF and Argon2 to encrypt your notes."
+msgstr "my-NoteBook'ta yaptığınız her şey gizli kalır. Notlarınızı şifrelemek için XChaCha20-Poly1305-IETF ve Argon2 kullanıyoruz."
 
 #: src/strings.ts:2679
 msgid "Example"
@@ -3652,8 +3656,8 @@ msgid "File length mismatch. Expected {expectedSize} but got {currentSize} bytes
 msgstr "Dosya uzunluğu uyuşmuyor. {expectedSize} bekleniyordu, {currentSize} bayt alındı. Lütfen bu dosyayı ek yöneticisinden yeniden yükleyin."
 
 #: src/strings.ts:2549
-msgid "File links cannot be opened in browsers. Please use the Notesnook desktop app."
-msgstr "Dosya bağlantıları tarayıcılarda açılamaz. Lütfen Notesnook masaüstü uygulamasını kullanın."
+msgid "File links cannot be opened in browsers. Please use the my-NoteBook desktop app."
+msgstr "Dosya bağlantıları tarayıcılarda açılamaz. Lütfen my-NoteBook masaüstü uygulamasını kullanın."
 
 #: src/strings.ts:865
 msgid "File mismatch"
@@ -3720,16 +3724,16 @@ msgid "Follow us on Mastodon"
 msgstr "Bizi Mastodon'da takip edin"
 
 #: src/strings.ts:1178
-msgid "Follow us on Mastodon for updates and news about Notesnook"
-msgstr "Notesnook hakkındaki güncellemeler ve haberler için bizi Mastodon'da takip edin"
+msgid "Follow us on Mastodon for updates and news about my-NoteBook"
+msgstr "my-NoteBook hakkındaki güncellemeler ve haberler için bizi Mastodon'da takip edin"
 
 #: src/strings.ts:1179
 msgid "Follow us on X"
 msgstr "Bizi X'te takip edin"
 
 #: src/strings.ts:1180
-msgid "Follow us on X for updates and news about Notesnook"
-msgstr "Notesnook hakkındaki güncellemeler ve haberler için bizi X'te takip edin"
+msgid "Follow us on X for updates and news about my-NoteBook"
+msgstr "my-NoteBook hakkındaki güncellemeler ve haberler için bizi X'te takip edin"
 
 #: src/strings.ts:2073
 msgid "Font family"
@@ -3874,16 +3878,16 @@ msgid "Get helpful debug info about the app to help us find bugs."
 msgstr "Hataları bulmamıza yardımcı olmak için uygulama hakkında faydalı hata ayıklama bilgileri edinin."
 
 #: src/strings.ts:1193
-msgid "Get Notesnook app on your desktop and access all notes"
-msgstr "Notesnook uygulamasını bilgisayarınıza kurun ve tüm notlarınıza erişin"
+msgid "Get my-NoteBook app on your desktop and access all notes"
+msgstr "my-NoteBook uygulamasını bilgisayarınıza kurun ve tüm notlarınıza erişin"
 
 #: src/strings.ts:1959
-msgid "Get Notesnook app on your iPhone and access all your notes on the go."
-msgstr "Notesnook uygulamasını iPhone'unuza kurun ve tüm notlarınıza her yerde erişin."
+msgid "Get my-NoteBook app on your iPhone and access all your notes on the go."
+msgstr "my-NoteBook uygulamasını iPhone'unuza kurun ve tüm notlarınıza her yerde erişin."
 
 #: src/strings.ts:1961
-msgid "Get Notesnook app on your iPhone or Android device and access all your notes on the go."
-msgstr "Notesnook uygulamasını iPhone'unuza veya Android cihazınıza kurun ve tüm notlarınıza her yerde erişin."
+msgid "Get my-NoteBook app on your iPhone or Android device and access all your notes on the go."
+msgstr "my-NoteBook uygulamasını iPhone'unuza veya Android cihazınıza kurun ve tüm notlarınıza her yerde erişin."
 
 #: src/strings.ts:512
 msgid "Get started"
@@ -4143,12 +4147,12 @@ msgid "If this continues to happen, please reach out to us via"
 msgstr "Bu durum devam ederse bize şu yolla ulaşın:"
 
 #: src/strings.ts:1916
-msgid "If true, Notesnook will automatically start up when you turn on & login to your system."
-msgstr "Etkinse, sisteminizi açıp giriş yaptığınızda Notesnook otomatik başlar."
+msgid "If true, my-NoteBook will automatically start up when you turn on & login to your system."
+msgstr "Etkinse, sisteminizi açıp giriş yaptığınızda my-NoteBook otomatik başlar."
 
 #: src/strings.ts:1919
-msgid "If true, Notesnook will start minimized to either the system tray or your system taskbar/dock. This setting only works with Auto start on system startup is enabled."
-msgstr "Etkinse, Notesnook sistem tepsisine ya da görev çubuğuna/dock'a küçültülmüş olarak başlar. Bu ayar yalnızca \"Sistem başlangıcında otomatik başlat\" etkinken çalışır."
+msgid "If true, my-NoteBook will start minimized to either the system tray or your system taskbar/dock. This setting only works with Auto start on system startup is enabled."
+msgstr "Etkinse, my-NoteBook sistem tepsisine ya da görev çubuğuna/dock'a küçültülmüş olarak başlar. Bu ayar yalnızca \"Sistem başlangıcında otomatik başlat\" etkinken çalışır."
 
 #: src/strings.ts:1598
 msgid "If you can't scan the QR code above, enter this text instead (spaces don't matter)"
@@ -4432,8 +4436,8 @@ msgid "It seems that your changes could not be saved. What to do next:"
 msgstr "Değişiklikleriniz kaydedilemedi gibi görünüyor. Şimdi ne yapmalı:"
 
 #: src/strings.ts:248
-msgid "It took us a year to bring Notesnook to life. Share your experience and suggestions to help us improve it."
-msgstr "Notesnook'u hayata geçirmek bir yılımızı aldı. Geliştirmemize yardımcı olmak için deneyiminizi ve önerilerinizi paylaşın."
+msgid "It took us a year to bring my-NoteBook to life. Share your experience and suggestions to help us improve it."
+msgstr "my-NoteBook'u hayata geçirmek bir yılımızı aldı. Geliştirmemize yardımcı olmak için deneyiminizi ve önerilerinizi paylaşın."
 
 #: src/strings.ts:2054
 msgid "Italic"
@@ -4512,6 +4516,14 @@ msgstr "Son"
 msgid "Last edited at"
 msgstr "Son düzenleme"
 
+#: src/strings.ts:3284
+msgid "Last full backup: {date}"
+msgstr ""
+
+#: src/strings.ts:3285
+msgid "Last partial backup: {date}"
+msgstr ""
+
 #: src/strings.ts:2469
 msgid "Last used on"
 msgstr "Son kullanım"
@@ -4545,8 +4557,8 @@ msgid "Learn more about Monographs"
 msgstr "Monograflar hakkında daha fazla bilgi"
 
 #: src/strings.ts:245
-msgid "Learn more about Notesnook Monograph"
-msgstr "Notesnook Monograph hakkında daha fazla bilgi"
+msgid "Learn more about my-NoteBook Monograph"
+msgstr "my-NoteBook Monograph hakkında daha fazla bilgi"
 
 #: src/strings.ts:592
 msgid "Least relevant first"
@@ -4561,12 +4573,12 @@ msgid "Legal"
 msgstr "Yasal"
 
 #: src/strings.ts:428
-msgid "Let us know if you have faced any issue/bug while using Notesnook. We will try to fix it as soon as possible."
-msgstr "Notesnook'u kullanırken bir sorun veya hatayla karşılaştıysanız bize bildirin. En kısa sürede düzeltmeye çalışacağız."
+msgid "Let us know if you have faced any issue/bug while using my-NoteBook. We will try to fix it as soon as possible."
+msgstr "my-NoteBook'u kullanırken bir sorun veya hatayla karşılaştıysanız bize bildirin. En kısa sürede düzeltmeye çalışacağız."
 
 #: src/strings.ts:2832
-msgid "Let's look back at your year in Notesnook"
-msgstr "Notesnook ile geçen yılınıza bir göz atalım"
+msgid "Let's look back at your year in my-NoteBook"
+msgstr "my-NoteBook ile geçen yılınıza bir göz atalım"
 
 #: src/strings.ts:2763
 msgid "Level up with more storage."
@@ -4779,8 +4791,8 @@ msgid "Login to encrypt and sync notes"
 msgstr "Notları şifrelemek ve eşitlemek için giriş yapın"
 
 #: src/strings.ts:2392
-msgid "Login to upload attachments. [Read more](https://notesnook.com/help/faqs/login-to-upload-attachments)"
-msgstr "Ek yüklemek için giriş yapın. [Daha fazla bilgi edinin](https://notesnook.com/help/faqs/login-to-upload-attachments)"
+msgid "Login to upload attachments."
+msgstr ""
 
 #: src/strings.ts:492
 msgid "Login to your account"
@@ -5076,6 +5088,62 @@ msgstr "Çöp kutusuna taşı"
 msgid "Multi-layer encryption to most important notes"
 msgstr "En önemli notlar için çok katmanlı şifreleme"
 
+#: src/strings.ts:2319
+msgid "my-NoteBook"
+msgstr "my-NoteBook"
+
+#: src/strings.ts:2380
+msgid "my-NoteBook Circle"
+msgstr "my-NoteBook Circle"
+
+#: src/strings.ts:2382
+msgid "my-NoteBook Circle brings together trusted partners who share our commitment to privacy, transparency, and user freedom."
+msgstr "my-NoteBook Circle, gizlilik, şeffaflık ve kullanıcı özgürlüğü konusundaki kararlılığımızı paylaşan güvenilir iş ortaklarını bir araya getirir."
+
+#: src/strings.ts:2988
+msgid "my-NoteBook detected that it is running under ARM64 translation. For the best performance, please download the ARM64 build of my-NoteBook from our website."
+msgstr "my-NoteBook, ARM64 çevirisi altında çalıştığını tespit etti. En iyi performans için lütfen web sitemizden my-NoteBook'un ARM64 sürümünü indirin."
+
+#: src/strings.ts:1945
+msgid "my-NoteBook Importer"
+msgstr "my-NoteBook İçe Aktarıcı"
+
+#: src/strings.ts:3060
+msgid "my-NoteBook is available on all major platforms — for everyone."
+msgstr "my-NoteBook tüm önemli platformlarda kullanılabilir — herkes için."
+
+#: src/strings.ts:970
+msgid "my-NoteBook Pro"
+msgstr "my-NoteBook Pro"
+
+#: src/strings.ts:1974
+msgid ""
+"my-NoteBook uses the following DNS providers:\n"
+"\n"
+"1. Cloudflare DNS\n"
+"2. Quad9\n"
+"\n"
+"This can sometimes bypass local ISP blockages on my-NoteBook traffic. Disable this if you want the app to use system's DNS settings."
+msgstr ""
+"my-NoteBook şu DNS sağlayıcılarını kullanır:\n"
+"\n"
+"1. Cloudflare DNS\n"
+"2. Quad9\n"
+"\n"
+"Bu, bazen yerel servis sağlayıcının my-NoteBook trafiğine getirdiği engelleri aşabilir. Uygulamanın sistemin DNS ayarlarını kullanmasını istiyorsanız bunu kapatın."
+
+#: src/strings.ts:898
+msgid "my-NoteBook will send you a 2FA code on your email when prompted"
+msgstr "my-NoteBook, istendiğinde e-postanıza bir 2FA kodu gönderir"
+
+#: src/strings.ts:905
+msgid "my-NoteBook will send you an SMS with a 2FA code when prompted"
+msgstr "my-NoteBook, istendiğinde 2FA kodlu bir SMS gönderir"
+
+#: src/strings.ts:3163
+msgid "MY-NOTEBOOK WRAPPED {year}"
+msgstr "MY-NOTEBOOK ÖZET {year}"
+
 #: src/strings.ts:810
 msgid "Name"
 msgstr "Ad"
@@ -5180,6 +5248,10 @@ msgstr "Yeni oluşturulan notlar kategorisiz olacak"
 msgid "Next"
 msgstr "İleri"
 
+#: src/strings.ts:3280
+msgid "Next full backup: {date}"
+msgstr ""
+
 #: src/strings.ts:2174
 msgid "Next match"
 msgstr "Sonraki eşleşme"
@@ -5187,6 +5259,10 @@ msgstr "Sonraki eşleşme"
 #: src/strings.ts:2857
 msgid "Next month"
 msgstr "Gelecek ay"
+
+#: src/strings.ts:3281
+msgid "Next partial backup: {date}"
+msgstr ""
 
 #: src/strings.ts:2220
 msgid "Next tab"
@@ -5412,62 +5488,6 @@ msgstr "Aylık notlar"
 msgid "notes this year"
 msgstr "bu yıl not"
 
-#: src/strings.ts:2319
-msgid "Notesnook"
-msgstr "Notesnook"
-
-#: src/strings.ts:2380
-msgid "Notesnook Circle"
-msgstr "Notesnook Circle"
-
-#: src/strings.ts:2382
-msgid "Notesnook Circle brings together trusted partners who share our commitment to privacy, transparency, and user freedom."
-msgstr "Notesnook Circle, gizlilik, şeffaflık ve kullanıcı özgürlüğü konusundaki kararlılığımızı paylaşan güvenilir iş ortaklarını bir araya getirir."
-
-#: src/strings.ts:2988
-msgid "Notesnook detected that it is running under ARM64 translation. For the best performance, please download the ARM64 build of Notesnook from our website."
-msgstr "Notesnook, ARM64 çevirisi altında çalıştığını tespit etti. En iyi performans için lütfen web sitemizden Notesnook'un ARM64 sürümünü indirin."
-
-#: src/strings.ts:1945
-msgid "Notesnook Importer"
-msgstr "Notesnook İçe Aktarıcı"
-
-#: src/strings.ts:3060
-msgid "Notesnook is available on all major platforms — for everyone."
-msgstr "Notesnook tüm önemli platformlarda kullanılabilir — herkes için."
-
-#: src/strings.ts:970
-msgid "Notesnook Pro"
-msgstr "Notesnook Pro"
-
-#: src/strings.ts:1974
-msgid ""
-"Notesnook uses the following DNS providers:\n"
-"\n"
-"1. Cloudflare DNS\n"
-"2. Quad9\n"
-"\n"
-"This can sometimes bypass local ISP blockages on Notesnook traffic. Disable this if you want the app to use system's DNS settings."
-msgstr ""
-"Notesnook şu DNS sağlayıcılarını kullanır:\n"
-"\n"
-"1. Cloudflare DNS\n"
-"2. Quad9\n"
-"\n"
-"Bu, bazen yerel servis sağlayıcının Notesnook trafiğine getirdiği engelleri aşabilir. Uygulamanın sistemin DNS ayarlarını kullanmasını istiyorsanız bunu kapatın."
-
-#: src/strings.ts:898
-msgid "Notesnook will send you a 2FA code on your email when prompted"
-msgstr "Notesnook, istendiğinde e-postanıza bir 2FA kodu gönderir"
-
-#: src/strings.ts:905
-msgid "Notesnook will send you an SMS with a 2FA code when prompted"
-msgstr "Notesnook, istendiğinde 2FA kodlu bir SMS gönderir"
-
-#: src/strings.ts:3163
-msgid "NOTESNOOK WRAPPED {year}"
-msgstr "NOTESNOOK ÖZET {year}"
-
 #: src/strings.ts:3143
 msgid "Notice"
 msgstr "Bildirim"
@@ -5597,8 +5617,8 @@ msgid "Open source"
 msgstr "Açık kaynak"
 
 #: src/strings.ts:1189
-msgid "Open source libraries used in Notesnook"
-msgstr "Notesnook'ta kullanılan açık kaynak kitaplıklar"
+msgid "Open source libraries used in my-NoteBook"
+msgstr "my-NoteBook'ta kullanılan açık kaynak kitaplıklar"
 
 #: src/strings.ts:1188
 msgid "Open source licenses"
@@ -5750,8 +5770,8 @@ msgid "PDF is password protected"
 msgstr "PDF parola korumalı"
 
 #: src/strings.ts:3122
-msgid "Personalize & make Notesnook your own"
-msgstr "Kişiselleştirin ve Notesnook'u kendinize göre özelleştirin"
+msgid "Personalize & make my-NoteBook your own"
+msgstr "Kişiselleştirin ve my-NoteBook'u kendinize göre özelleştirin"
 
 #: src/strings.ts:1203
 msgid "Phone model"
@@ -6279,12 +6299,12 @@ msgid "Quote"
 msgstr "Alıntı"
 
 #: src/strings.ts:1261
-msgid "Rate Notesnook on App Store"
-msgstr "Notesnook'u App Store'da değerlendirin"
+msgid "Rate my-NoteBook on App Store"
+msgstr "my-NoteBook'u App Store'da değerlendirin"
 
 #: src/strings.ts:1262
-msgid "Rate Notesnook on Play Store"
-msgstr "Notesnook'u Play Store'da değerlendirin"
+msgid "Rate my-NoteBook on Play Store"
+msgstr "my-NoteBook'u Play Store'da değerlendirin"
 
 #: src/strings.ts:536
 msgid "Rate now (It takes only a second)"
@@ -6299,8 +6319,8 @@ msgid "Read only"
 msgstr "Salt okunur"
 
 #: src/strings.ts:1166
-msgid "Read the documentation to learn more about Notesnook"
-msgstr "Notesnook hakkında daha fazla bilgi için belgeleri okuyun"
+msgid "Read the documentation to learn more about my-NoteBook"
+msgstr "my-NoteBook hakkında daha fazla bilgi için belgeleri okuyun"
 
 #: src/strings.ts:1187
 msgid "Read the privacy policy"
@@ -6501,8 +6521,8 @@ msgid "Reminders"
 msgstr "Hatırlatıcılar"
 
 #: src/strings.ts:1280
-msgid "Reminders cannot be set because notifications have been disabled from app settings. If you want to keep receiving reminder notifications, enable notifications for Notesnook from app settings."
-msgstr "Bildirimler uygulama ayarlarından kapatıldığı için hatırlatıcı ayarlanamıyor. Hatırlatıcı bildirimleri almaya devam etmek istiyorsanız uygulama ayarlarından Notesnook için bildirimleri etkinleştirin."
+msgid "Reminders cannot be set because notifications have been disabled from app settings. If you want to keep receiving reminder notifications, enable notifications for my-NoteBook from app settings."
+msgstr "Bildirimler uygulama ayarlarından kapatıldığı için hatırlatıcı ayarlanamıyor. Hatırlatıcı bildirimleri almaya devam etmek istiyorsanız uygulama ayarlarından my-NoteBook için bildirimleri etkinleştirin."
 
 #: src/strings.ts:1775
 msgid "Reminders will not be active on this device as it does not support notifications."
@@ -7058,8 +7078,8 @@ msgid "Security key successfully registered."
 msgstr "Güvenlik anahtarı başarıyla kaydedildi."
 
 #: src/strings.ts:1195
-msgid "See what the future of Notesnook is going to be like."
-msgstr "Notesnook'un geleceğinin nasıl olacağını görün."
+msgid "See what the future of my-NoteBook is going to be like."
+msgstr "my-NoteBook'un geleceğinin nasıl olacağını görün."
 
 #: src/strings.ts:1233
 msgid "Select"
@@ -7110,8 +7130,8 @@ msgid "Select day of the week to repeat the reminder."
 msgstr "Hatırlatıcının tekrarlanacağı haftanın gününü seçin."
 
 #: src/strings.ts:1487
-msgid "Select folder where Notesnook backup files are stored to view and restore them from the app"
-msgstr "Notesnook yedek dosyalarının saklandığı klasörü seçerek bunları uygulamadan görüntüleyin ve geri yükleyin"
+msgid "Select folder where my-NoteBook backup files are stored to view and restore them from the app"
+msgstr "my-NoteBook yedek dosyalarının saklandığı klasörü seçerek bunları uygulamadan görüntüleyin ve geri yükleyin"
 
 #: src/strings.ts:1488
 msgid "Select folder with backup files"
@@ -7162,8 +7182,8 @@ msgid "Select the languages the spell checker should check in."
 msgstr "Yazım denetiminin denetleyeceği dilleri seçin."
 
 #: src/strings.ts:2235
-msgid "Select the release track for Notesnook."
-msgstr "Notesnook için sürüm kanalını seçin."
+msgid "Select the release track for my-NoteBook."
+msgstr "my-NoteBook için sürüm kanalını seçin."
 
 #: src/strings.ts:210
 msgid "SELECTED NOTE"
@@ -7395,17 +7415,17 @@ msgstr "Paylaş"
 msgid "Share backup"
 msgstr "Yedeği paylaş"
 
+#: src/strings.ts:1646
+msgid "Share my-NoteBook with friends!"
+msgstr "my-NoteBook'u arkadaşlarınızla paylaşın!"
+
 #: src/strings.ts:406
 msgid "Share note"
 msgstr "Notu paylaş"
 
-#: src/strings.ts:1646
-msgid "Share Notesnook with friends!"
-msgstr "Notesnook'u arkadaşlarınızla paylaşın!"
-
 #: src/strings.ts:2424
-msgid "Share things to Notesnook from anywhere using the Inbox API"
-msgstr "Gelen kutusu API'siyle her yerden Notesnook'a içerik paylaşın"
+msgid "Share things to my-NoteBook from anywhere using the Inbox API"
+msgstr "Gelen kutusu API'siyle her yerden my-NoteBook'a içerik paylaşın"
 
 #: src/strings.ts:541
 msgid "Share to cloud"
@@ -7965,8 +7985,8 @@ msgid "Thank you for the purchase"
 msgstr "Satın aldığınız için teşekkürler"
 
 #: src/strings.ts:431
-msgid "Thank you for updating Notesnook! We will be applying some minor changes for a better note taking experience."
-msgstr "Notesnook'u güncellediğiniz için teşekkürler! Daha iyi bir not alma deneyimi için bazı küçük değişiklikler uygulayacağız."
+msgid "Thank you for updating my-NoteBook! We will be applying some minor changes for a better note taking experience."
+msgstr "my-NoteBook'u güncellediğiniz için teşekkürler! Daha iyi bir not alma deneyimi için bazı küçük değişiklikler uygulayacağız."
 
 #: src/strings.ts:1867
 msgid "Thank you for your feedback!"
@@ -7993,12 +8013,12 @@ msgid "The API key allows you to access NN's inbox functionality."
 msgstr "API anahtarı NN'in gelen kutusu işlevselliğine erişmenizi sağlar."
 
 #: src/strings.ts:661
-msgid "The default dark theme for the Notesnook app"
-msgstr "Notesnook uygulaması için varsayılan koyu tema"
+msgid "The default dark theme for the my-NoteBook app"
+msgstr "my-NoteBook uygulaması için varsayılan koyu tema"
 
 #: src/strings.ts:662
-msgid "The default light theme for Notesnook app."
-msgstr "Notesnook uygulaması için varsayılan açık tema."
+msgid "The default light theme for my-NoteBook app."
+msgstr "my-NoteBook uygulaması için varsayılan açık tema."
 
 #: src/strings.ts:2411
 msgid "The incoming note could not be unlocked with the provided password. Enter the correct password for the incoming note"
@@ -8008,13 +8028,13 @@ msgstr "Gelen notun kilidi verilen parolayla açılamadı. Gelen not için doğr
 msgid "The information above will be publically available at"
 msgstr "Yukarıdaki bilgiler şu adreste herkese açık olacak:"
 
+#: src/strings.ts:2386
+msgid "The my-NoteBook Circle is exclusive to subscribers. Please consider subscribing to gain access to my-NoteBook Circle and enjoy additional benefits."
+msgstr "my-NoteBook Circle yalnızca abonelere özeldir. my-NoteBook Circle'a erişmek ve ek avantajlardan yararlanmak için abone olmayı düşünün."
+
 #: src/strings.ts:2809
 msgid "The note you are trying to append to has been deleted."
 msgstr "Eklemeye çalıştığınız not silinmiş."
-
-#: src/strings.ts:2386
-msgid "The Notesnook Circle is exclusive to subscribers. Please consider subscribing to gain access to Notesnook Circle and enjoy additional benefits."
-msgstr "Notesnook Circle yalnızca abonelere özeldir. Notesnook Circle'a erişmek ve ek avantajlardan yararlanmak için abone olmayı düşünün."
 
 #: src/strings.ts:2571
 msgid "The password for decrypting the Colornote backup file."
@@ -8736,12 +8756,12 @@ msgid "Using {instance} (v{version})"
 msgstr "{instance} kullanılıyor (v{version})"
 
 #: src/strings.ts:2585
-msgid "Using Notesnook without an account will **NOT** sync your notes across devices and could result in data loss if you lose access to your device or uninstall the app. Make sure to backup your notes regularly."
-msgstr "Notesnook'u hesap olmadan kullanmak, notlarınızı cihazlar arasında **EŞİTLEMEZ** ve cihazınıza erişiminizi kaybederseniz veya uygulamayı kaldırırsanız veri kaybına yol açabilir. Notlarınızı düzenli olarak yedeklediğinizden emin olun."
+msgid "Using my-NoteBook without an account will **NOT** sync your notes across devices and could result in data loss if you lose access to your device or uninstall the app. Make sure to backup your notes regularly."
+msgstr "my-NoteBook'u hesap olmadan kullanmak, notlarınızı cihazlar arasında **EŞİTLEMEZ** ve cihazınıza erişiminizi kaybederseniz veya uygulamayı kaldırırsanız veri kaybına yol açabilir. Notlarınızı düzenli olarak yedeklediğinizden emin olun."
 
 #: src/strings.ts:2049
-msgid "Using official Notesnook instance"
-msgstr "Resmi Notesnook örneği kullanılıyor"
+msgid "Using official my-NoteBook instance"
+msgstr "Resmi my-NoteBook örneği kullanılıyor"
 
 #: src/strings.ts:1583
 msgid "v{version} available"
@@ -8792,8 +8812,8 @@ msgid "Verify subscription"
 msgstr "Aboneliği doğrula"
 
 #: src/strings.ts:976
-msgid "Verify your subscription to Notesnook Pro"
-msgstr "Notesnook Pro aboneliğinizi doğrulayın"
+msgid "Verify your subscription to my-NoteBook Pro"
+msgstr "my-NoteBook Pro aboneliğinizi doğrulayın"
 
 #: src/strings.ts:1746
 msgid "Verifying 2FA code"
@@ -8969,12 +8989,12 @@ msgid "Welcome back!"
 msgstr "Tekrar hoş geldiniz!"
 
 #: src/strings.ts:2366
-msgid "Welcome to Notesnook {plan}"
-msgstr "Notesnook {plan} planına hoş geldiniz"
+msgid "Welcome to my-NoteBook {plan}"
+msgstr "my-NoteBook {plan} planına hoş geldiniz"
 
 #: src/strings.ts:3266
-msgid "Welcome to Notesnook Beta!"
-msgstr "Notesnook Beta'ya Hoş Geldiniz!"
+msgid "Welcome to my-NoteBook Beta!"
+msgstr "my-NoteBook Beta'ya Hoş Geldiniz!"
 
 #: src/strings.ts:3268
 msgid "Welcome to v{version}"
@@ -9078,8 +9098,8 @@ msgid "Yesterday, {time}"
 msgstr "Dün, {time}"
 
 #: src/strings.ts:2863
-msgid "You already have a Notesnook subscription. You can change your plan from Settings > Subscription details."
-msgstr "Zaten bir Notesnook aboneliğiniz var. Planınızı Ayarlar > Abonelik ayrıntıları bölümünden değiştirebilirsiniz."
+msgid "You already have a my-NoteBook subscription. You can change your plan from Settings > Subscription details."
+msgstr "Zaten bir my-NoteBook aboneliğiniz var. Planınızı Ayarlar > Abonelik ayrıntıları bölümünden değiştirebilirsiniz."
 
 #: src/strings.ts:92
 msgid "You also agree to receive marketing emails from us which you can opt-out of from app settings."
@@ -9102,8 +9122,8 @@ msgid "You are editing #{tag}"
 msgstr "#{tag} etiketini düzenliyorsunuz"
 
 #: src/strings.ts:1640
-msgid "You are logging into the beta version of Notesnook. Switching between beta &amp; stable versions can cause weird issues including data loss. It is recommended that you do not use both simultaneously."
-msgstr "Notesnook'un beta sürümüne giriş yapıyorsunuz. Beta &amp; kararlı sürümler arasında geçiş yapmak, veri kaybı dahil garip sorunlara yol açabilir. İkisini aynı anda kullanmamanız önerilir."
+msgid "You are logging into the beta version of my-NoteBook. Switching between beta &amp; stable versions can cause weird issues including data loss. It is recommended that you do not use both simultaneously."
+msgstr "my-NoteBook'un beta sürümüne giriş yapıyorsunuz. Beta &amp; kararlı sürümler arasında geçiş yapmak, veri kaybı dahil garip sorunlara yol açabilir. İkisini aynı anda kullanmamanız önerilir."
 
 #: src/strings.ts:1265
 msgid "You are not logged in"
@@ -9118,8 +9138,8 @@ msgid "You are on this plan."
 msgstr "Bu plandasınız."
 
 #: src/strings.ts:3132
-msgid "You are one step away from unlocking the full potential of Notesnook."
-msgstr "Notesnook'un tüm potansiyelini ortaya çıkarmaya bir adım uzaktasınız."
+msgid "You are one step away from unlocking the full potential of my-NoteBook."
+msgstr "my-NoteBook'un tüm potansiyelini ortaya çıkarmaya bir adım uzaktasınız."
 
 #: src/strings.ts:809
 msgid "You are renaming color {color}"
@@ -9172,17 +9192,8 @@ msgid ""
 "\n"
 "Please note that we will respond to your bug report on the link above. **We recommend that you save the above link for later reference.**\n"
 "\n"
-"If your issue is critical (e.g. notes not syncing, crashes etc.), please [join our Discord community](https://go.notesnook.com/discord) for one-to-one support."
+"If your issue is critical (e.g. notes not syncing, crashes etc.), please mention it in your bug report."
 msgstr ""
-"You can track your bug report at [{url}]({url}).\n"
-"\n"
-"Please note that we will respond to your bug report on the link above. **We recommend that you save the above link for later reference.**\n"
-"\n"
-"If your issue is critical (e.g. notes not syncing, crashes etc.), please [join our Discord community](https://go.notesnook.com/discord) for one-to-one support.Hata raporunuzu [{url}]({url}) adresinden takip edebilirsiniz.\n"
-"\n"
-"Hata raporunuza yukarıdaki bağlantı üzerinden yanıt vereceğimizi lütfen unutmayın. **Bu bağlantıyı ileride başvurmak üzere kaydetmenizi öneririz.**\n"
-"\n"
-"Sorununuz kritikse (ör. notların eşitlenmemesi, çökmeler vb.), birebir destek için [Discord topluluğumuza katılın](https://go.notesnook.com/discord)."
 
 #: src/strings.ts:1881
 msgid ""
@@ -9278,45 +9289,42 @@ msgstr "Sunucu adreslerini değiştirmek veya sıfırlamak için çıkış yapma
 
 #: src/strings.ts:2506
 msgid ""
-"You need to login to restore attachments from a backup file. [Read more](https://notesnook.com/help/faqs/login-to-restore-attachments-in-backup).\n"
+"You need to login to restore attachments from a backup file.\n"
 "  \n"
 "Continue without attachments?"
 msgstr ""
-"Ekleri yedekleme dosyasından geri yüklemek için giriş yapmanız gerekir. [Daha fazla bilgi edinin](https://notesnook.com/help/faqs/login-to-restore-attachments-in-backup).\n"
-"  \n"
-"Ekler olmadan devam edilsin mi?"
 
 #: src/strings.ts:3110
 msgid "You own your notes, not us. No proprietary formats. No vendor lock in. No waiting for hours to download your notes."
 msgstr "Notlarınız size aittir, bize değil. Özel mülk formatlar yok. Sağlayıcı bağımlılığı yok. Notlarınızı indirmek için saatlerce beklemek yok."
 
 #: src/strings.ts:761
-msgid "You simply cannot get any better of a note taking app than @notesnook. The UI is clean and slick, it is feature rich, encrypted, reasonably priced (esp. for students & educators) & open source"
-msgstr "@notesnook'tan daha iyi bir not uygulaması bulmanız mümkün değil. Arayüzü sade ve şık, özellik açısından zengin, şifreli, makul fiyatlı (özellikle öğrenciler ve eğitimciler için) ve açık kaynak"
+msgid "You simply cannot get any better of a note taking app than this one. The UI is clean and slick, it is feature rich, encrypted, reasonably priced (esp. for students & educators) & open source"
+msgstr ""
 
 #: src/strings.ts:972
-msgid "You subscribed to Notesnook Pro on {date}. Verify this subscription?"
-msgstr "Notesnook Pro aboneliğinizi {date} tarihinde başlattınız. Bu abonelik doğrulansın mı?"
+msgid "You subscribed to my-NoteBook Pro on {date}. Verify this subscription?"
+msgstr "my-NoteBook Pro aboneliğinizi {date} tarihinde başlattınız. Bu abonelik doğrulansın mı?"
 
 #: src/strings.ts:644
-msgid "You subscribed to Notesnook Pro on Android Phone/Tablet using Google In App Purchase."
-msgstr "Notesnook Pro aboneliğinizi Android telefon/tablette Google Uygulama İçi Satın Alma ile başlattınız."
+msgid "You subscribed to my-NoteBook Pro on Android Phone/Tablet using Google In App Purchase."
+msgstr "my-NoteBook Pro aboneliğinizi Android telefon/tablette Google Uygulama İçi Satın Alma ile başlattınız."
 
 #: src/strings.ts:639
-msgid "You subscribed to Notesnook Pro on iOS using Apple In App Purchase. You can cancel anytime with your iTunes Account settings."
-msgstr "Notesnook Pro aboneliğinizi iOS'ta Apple Uygulama İçi Satın Alma ile başlattınız. iTunes hesap ayarlarınızdan istediğiniz zaman iptal edebilirsiniz."
+msgid "You subscribed to my-NoteBook Pro on iOS using Apple In App Purchase. You can cancel anytime with your iTunes Account settings."
+msgstr "my-NoteBook Pro aboneliğinizi iOS'ta Apple Uygulama İçi Satın Alma ile başlattınız. iTunes hesap ayarlarınızdan istediğiniz zaman iptal edebilirsiniz."
 
 #: src/strings.ts:648
-msgid "You subscribed to Notesnook Pro on the Web/Desktop App."
-msgstr "Notesnook Pro aboneliğinizi web/masaüstü uygulamasından başlattınız."
+msgid "You subscribed to my-NoteBook Pro on the Web/Desktop App."
+msgstr "my-NoteBook Pro aboneliğinizi web/masaüstü uygulamasından başlattınız."
 
 #: src/strings.ts:652
-msgid "You subscribed to Notesnook Pro using a gift card."
-msgstr "Notesnook Pro aboneliğinizi bir hediye kartıyla başlattınız."
+msgid "You subscribed to my-NoteBook Pro using a gift card."
+msgstr "my-NoteBook Pro aboneliğinizi bir hediye kartıyla başlattınız."
 
 #: src/strings.ts:634
-msgid "You were awarded a subscription to Notesnook Pro by Streetwriters."
-msgstr "Streetwriters tarafından size bir Notesnook Pro aboneliği verildi."
+msgid "You were awarded a subscription to my-NoteBook Pro by Streetwriters."
+msgstr "Streetwriters tarafından size bir my-NoteBook Pro aboneliği verildi."
 
 #: src/strings.ts:420
 msgid "You will be logged out from all your devices"
@@ -9484,8 +9492,8 @@ msgid "Your plan will be switched to {plan} plan. You will receive a credit for 
 msgstr "Planınız {plan} planı olarak değiştirilecektir. Önceki aboneliğinizdeki kullanılmayan süre için bir kredi alacaksınız ve yalnızca yeni aboneliğiniz için orantılı tutarı ödeyeceksiniz."
 
 #: src/strings.ts:757
-msgid "Your privacy matters to us, no matter who you are. In a world where everyone is trying to spy on you, Notesnook encrypts all your data before it leaves your device. With Notesnook no one can ever sell your data again."
-msgstr "Kim olursanız olun gizliliğiniz bizim için önemli. Herkesin sizi gözetlemeye çalıştığı bir dünyada Notesnook, tüm verilerinizi cihazınızdan ayrılmadan önce şifreler. Notesnook ile artık kimse verilerinizi satamaz."
+msgid "Your privacy matters to us, no matter who you are. In a world where everyone is trying to spy on you, my-NoteBook encrypts all your data before it leaves your device. With my-NoteBook no one can ever sell your data again."
+msgstr "Kim olursanız olun gizliliğiniz bizim için önemli. Herkesin sizi gözetlemeye çalıştığı bir dünyada my-NoteBook, tüm verilerinizi cihazınızdan ayrılmadan önce şifreler. my-NoteBook ile artık kimse verilerinizi satamaz."
 
 #: src/strings.ts:1208
 msgid "Your profile pictrure is stored 100% end-to-end encrypted and only visible to you."
@@ -9528,8 +9536,8 @@ msgid "Your support request has been forwarded"
 msgstr "Destek talebiniz iletildi"
 
 #: src/strings.ts:1878
-msgid "Your support request has been forwarded to our support team. We will get back to you via email as soon as possible. If you don't receive an email from us within 24-48 hours, please send us an email directly at support@notesnook.com."
-msgstr "Destek talebiniz destek ekibimize iletildi. En kısa sürede e-postayla size döneceğiz. 24-48 saat içinde bizden bir e-posta almazsanız lütfen doğrudan support@notesnook.com adresine yazın."
+msgid "Your support request has been forwarded to our support team. We will get back to you via email as soon as possible."
+msgstr ""
 
 #: src/strings.ts:2894
 msgid "Your trial has been canceled."

@@ -69,9 +69,6 @@ export const ThemeDetailsDialog = DialogManager.register(
               {theme.totalInstalls} {strings.installs()}
             </Text>
           ) : null}
-          <Text variant="subBody" sx={{ fontSize: "subtitle" }}>
-            {strings.licenseUnder(theme.license)}
-          </Text>
           <Flex sx={{ gap: 1, mt: 1 }}>
             {theme.homepage && (
               <Link

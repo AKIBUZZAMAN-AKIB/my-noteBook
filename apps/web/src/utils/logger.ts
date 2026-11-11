@@ -77,7 +77,7 @@ async function downloadLogs() {
     }
   })
     .pipeThrough(createZipStream())
-    .pipeTo(await createWriteStream("notesnook-logs.zip"));
+    .pipeTo(await createWriteStream("my-notebook-logs.zip"));
 }
 
 async function clearLogs() {

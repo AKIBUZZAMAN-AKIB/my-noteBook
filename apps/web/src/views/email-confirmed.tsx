@@ -174,7 +174,7 @@ function BlogPromoBanner() {
         {strings.tagPromoWinText()[2]}
       </Text>
       {/* <p>
-        Listen. We want you to buy Notesnook Pro. It's as simple as that. Since
+        Listen. We want you to buy my-NoteBook Pro. It's as simple as that. Since
         2019, we have been analyzing the ever increasing trend towards privacy
         invasive apps.
       </p>
@@ -189,9 +189,9 @@ function BlogPromoBanner() {
         encryption are just buzzwords.
       </p>
       <p>
-        We want you to buy Notesnook Pro. Not to line our own pockets but to
+        We want you to buy my-NoteBook Pro. Not to line our own pockets but to
         bring a change. Instead of. We want to hear that phrase. "I bought
-        Notesnook instead of Evernote". For us, that is success.
+        my-NoteBook instead of Evernote". For us, that is success.
       </p>
       <p>
         There are no two ways about it. The world is moving towards a time when

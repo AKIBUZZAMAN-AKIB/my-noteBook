@@ -231,7 +231,7 @@ function AlreadyPremium() {
     <>
       <Image src={Rocket} style={{ flexShrink: 0, width: 200, height: 200 }} />
       <Text variant="heading" mt={4} sx={{ textAlign: "center" }}>
-        Notesnook
+        my-NoteBook
       </Text>
       <Text variant="body" mt={1} sx={{ textAlign: "center" }}>
         {strings.alreadySubscribedChangeFromSettings()}

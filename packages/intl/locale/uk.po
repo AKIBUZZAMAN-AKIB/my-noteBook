@@ -629,12 +629,12 @@ msgid "{planTitle} plan"
 msgstr "Тариф {planTitle}"
 
 #: src/strings.ts:676
-msgid "{platform, select, android {{name} saved to selected path} other {{name} saved to File Manager/Notesnook/downloads}}"
-msgstr "{platform, select, android {{name} збережено у вибраній папці} other {{name} збережено у File Manager/Notesnook/downloads}}"
+msgid "{platform, select, android {{name} saved to selected path} other {{name} saved to File Manager/my-NoteBook/downloads}}"
+msgstr "{platform, select, android {{name} збережено у вибраній папці} other {{name} збережено у File Manager/my-NoteBook/downloads}}"
 
 #: src/strings.ts:1236
-msgid "{platform, select, android {Backup file saved in \"Notesnook backups\" folder on your phone.} other {Backup file is saved in File Manager/Notesnook folder}}"
-msgstr "{platform, select, android {Файл резервної копії збережено в папці \"Notesnook backups\" на вашому телефоні.} other {Файл резервної копії зберігається в папці File Manager/Notesnook}}"
+msgid "{platform, select, android {Backup file saved in \"my-NoteBook backups\" folder on your phone.} other {Backup file is saved in File Manager/my-NoteBook folder}}"
+msgstr "{platform, select, android {Файл резервної копії збережено в папці \"my-NoteBook backups\" на вашому телефоні.} other {Файл резервної копії зберігається в папці File Manager/my-NoteBook}}"
 
 #: src/strings.ts:2153
 msgid "{selected} selected"
@@ -693,8 +693,8 @@ msgid "/ month"
 msgstr "/ місяць"
 
 #: src/strings.ts:1649
-msgid "#notesnook"
-msgstr "#notesnook"
+msgid "#mynotebook"
+msgstr ""
 
 #: src/strings.ts:3267
 msgid "✨ Highlights ✨"
@@ -997,8 +997,8 @@ msgid "All the core features, minus the fluff."
 msgstr "Усі ключові функції без зайвого."
 
 #: src/strings.ts:1953
-msgid "All the source code for Notesnook is available & open for everyone on GitHub."
-msgstr "Увесь вихідний код Notesnook відкритий і доступний усім на GitHub."
+msgid "All the source code for my-NoteBook is available & open for everyone on GitHub."
+msgstr "Увесь вихідний код my-NoteBook відкритий і доступний усім на GitHub."
 
 #: src/strings.ts:385
 msgid "All tools are grouped"
@@ -1013,8 +1013,8 @@ msgid "All tools in this group will be removed from the toolbar."
 msgstr "Усі інструменти з цієї групи буде вилучено з панелі інструментів."
 
 #: src/strings.ts:1251
-msgid "All your backups are stored in 'Phone Storage/Notesnook/backups/' folder"
-msgstr "Усі ваші резервні копії зберігаються в папці 'Phone Storage/Notesnook/backups/'"
+msgid "All your backups are stored in 'Phone Storage/my-NoteBook/backups/' folder"
+msgstr "Усі ваші резервні копії зберігаються в папці 'Phone Storage/my-NoteBook/backups/'"
 
 #: src/strings.ts:94
 msgid "Already have an account?"
@@ -1797,8 +1797,8 @@ msgid "Characters"
 msgstr "Символи"
 
 #: src/strings.ts:1197
-msgid "Check for new version of Notesnook"
-msgstr "Перевірити наявність нової версії Notesnook"
+msgid "Check for new version of my-NoteBook"
+msgstr "Перевірити наявність нової версії my-NoteBook"
 
 #: src/strings.ts:1200
 msgid "Check for new version of the app available on app launch"
@@ -2190,8 +2190,8 @@ msgid "Configure"
 msgstr "Налаштувати"
 
 #: src/strings.ts:2201
-msgid "Configure server URLs for Notesnook"
-msgstr "Налаштувати URL-адреси серверів для Notesnook"
+msgid "Configure server URLs for my-NoteBook"
+msgstr "Налаштувати URL-адреси серверів для my-NoteBook"
 
 #: src/strings.ts:3001
 msgid "Confirm"
@@ -2773,6 +2773,10 @@ msgstr "Видалення тегів"
 msgid "Description"
 msgstr "Опис"
 
+#: src/strings.ts:3286
+msgid "Description is required"
+msgstr ""
+
 #: src/strings.ts:1909
 msgid "Desktop app"
 msgstr "Настільний застосунок"
@@ -2856,8 +2860,8 @@ msgid "Do not worry about losing your data. Turn on automatic backups on weekly 
 msgstr "Не турбуйтеся про втрату даних. Увімкніть автоматичне резервне копіювання щотижня або щодня."
 
 #: src/strings.ts:246
-msgid "Do you enjoy using Notesnook?"
-msgstr "Вам подобається користуватися Notesnook?"
+msgid "Do you enjoy using my-NoteBook?"
+msgstr "Вам подобається користуватися my-NoteBook?"
 
 #: src/strings.ts:1164
 msgid "Documentation"
@@ -3325,8 +3329,8 @@ msgid "every 5 years"
 msgstr "кожні 5 років"
 
 #: src/strings.ts:3044
-msgid "Everything you do in Notesnook stays private. We use XChaCha20-Poly1305-IETF and Argon2 to encrypt your notes."
-msgstr "Усе, що ви робите в Notesnook, залишається приватним. Ми використовуємо XChaCha20-Poly1305-IETF та Argon2 для шифрування ваших нотаток."
+msgid "Everything you do in my-NoteBook stays private. We use XChaCha20-Poly1305-IETF and Argon2 to encrypt your notes."
+msgstr "Усе, що ви робите в my-NoteBook, залишається приватним. Ми використовуємо XChaCha20-Poly1305-IETF та Argon2 для шифрування ваших нотаток."
 
 #: src/strings.ts:2679
 msgid "Example"
@@ -3652,8 +3656,8 @@ msgid "File length mismatch. Expected {expectedSize} but got {currentSize} bytes
 msgstr "Невідповідність розміру файлу. Очікувалося {expectedSize}, отримано {currentSize} байт. Надішліть цей файл заново через менеджер вкладень."
 
 #: src/strings.ts:2549
-msgid "File links cannot be opened in browsers. Please use the Notesnook desktop app."
-msgstr "Посилання на файли не можна відкрити в браузері. Скористайтеся настільним застосунком Notesnook."
+msgid "File links cannot be opened in browsers. Please use the my-NoteBook desktop app."
+msgstr "Посилання на файли не можна відкрити в браузері. Скористайтеся настільним застосунком my-NoteBook."
 
 #: src/strings.ts:865
 msgid "File mismatch"
@@ -3720,16 +3724,16 @@ msgid "Follow us on Mastodon"
 msgstr "Стежте за нами в Mastodon"
 
 #: src/strings.ts:1178
-msgid "Follow us on Mastodon for updates and news about Notesnook"
-msgstr "Стежте за нами в Mastodon, щоб дізнаватися новини про Notesnook"
+msgid "Follow us on Mastodon for updates and news about my-NoteBook"
+msgstr "Стежте за нами в Mastodon, щоб дізнаватися новини про my-NoteBook"
 
 #: src/strings.ts:1179
 msgid "Follow us on X"
 msgstr "Стежте за нами в X"
 
 #: src/strings.ts:1180
-msgid "Follow us on X for updates and news about Notesnook"
-msgstr "Стежте за нами в X, щоб дізнаватися новини про Notesnook"
+msgid "Follow us on X for updates and news about my-NoteBook"
+msgstr "Стежте за нами в X, щоб дізнаватися новини про my-NoteBook"
 
 #: src/strings.ts:2073
 msgid "Font family"
@@ -3874,16 +3878,16 @@ msgid "Get helpful debug info about the app to help us find bugs."
 msgstr "Отримайте корисну інформацію для налагодження застосунку, щоб допомогти нам знайти помилки."
 
 #: src/strings.ts:1193
-msgid "Get Notesnook app on your desktop and access all notes"
-msgstr "Установіть застосунок Notesnook на комп'ютер і отримайте доступ до всіх нотаток"
+msgid "Get my-NoteBook app on your desktop and access all notes"
+msgstr "Установіть застосунок my-NoteBook на комп'ютер і отримайте доступ до всіх нотаток"
 
 #: src/strings.ts:1959
-msgid "Get Notesnook app on your iPhone and access all your notes on the go."
-msgstr "Установіть застосунок Notesnook на iPhone і отримайте доступ до всіх нотаток у дорозі."
+msgid "Get my-NoteBook app on your iPhone and access all your notes on the go."
+msgstr "Установіть застосунок my-NoteBook на iPhone і отримайте доступ до всіх нотаток у дорозі."
 
 #: src/strings.ts:1961
-msgid "Get Notesnook app on your iPhone or Android device and access all your notes on the go."
-msgstr "Установіть застосунок Notesnook на iPhone або пристрій Android і отримайте доступ до всіх нотаток у дорозі."
+msgid "Get my-NoteBook app on your iPhone or Android device and access all your notes on the go."
+msgstr "Установіть застосунок my-NoteBook на iPhone або пристрій Android і отримайте доступ до всіх нотаток у дорозі."
 
 #: src/strings.ts:512
 msgid "Get started"
@@ -4143,12 +4147,12 @@ msgid "If this continues to happen, please reach out to us via"
 msgstr "Якщо це не припиняється, зв'яжіться з нами через"
 
 #: src/strings.ts:1916
-msgid "If true, Notesnook will automatically start up when you turn on & login to your system."
-msgstr "Якщо увімкнено, Notesnook запускатиметься автоматично під час увімкнення системи та входу в неї."
+msgid "If true, my-NoteBook will automatically start up when you turn on & login to your system."
+msgstr "Якщо увімкнено, my-NoteBook запускатиметься автоматично під час увімкнення системи та входу в неї."
 
 #: src/strings.ts:1919
-msgid "If true, Notesnook will start minimized to either the system tray or your system taskbar/dock. This setting only works with Auto start on system startup is enabled."
-msgstr "Якщо увімкнено, Notesnook запускатиметься згорнутим у системний лоток або на панель завдань/док. Це налаштування працює лише за увімкненого «Автозапуск під час старту системи»."
+msgid "If true, my-NoteBook will start minimized to either the system tray or your system taskbar/dock. This setting only works with Auto start on system startup is enabled."
+msgstr "Якщо увімкнено, my-NoteBook запускатиметься згорнутим у системний лоток або на панель завдань/док. Це налаштування працює лише за увімкненого «Автозапуск під час старту системи»."
 
 #: src/strings.ts:1598
 msgid "If you can't scan the QR code above, enter this text instead (spaces don't matter)"
@@ -4432,8 +4436,8 @@ msgid "It seems that your changes could not be saved. What to do next:"
 msgstr "Схоже, ваші зміни не вдалося зберегти. Що робити далі:"
 
 #: src/strings.ts:248
-msgid "It took us a year to bring Notesnook to life. Share your experience and suggestions to help us improve it."
-msgstr "Нам знадобився рік, щоб створити Notesnook. Поділіться своїм досвідом і пропозиціями, щоб допомогти нам його покращити."
+msgid "It took us a year to bring my-NoteBook to life. Share your experience and suggestions to help us improve it."
+msgstr "Нам знадобився рік, щоб створити my-NoteBook. Поділіться своїм досвідом і пропозиціями, щоб допомогти нам його покращити."
 
 #: src/strings.ts:2054
 msgid "Italic"
@@ -4512,6 +4516,14 @@ msgstr "Минулі"
 msgid "Last edited at"
 msgstr "Останнє редагування"
 
+#: src/strings.ts:3284
+msgid "Last full backup: {date}"
+msgstr ""
+
+#: src/strings.ts:3285
+msgid "Last partial backup: {date}"
+msgstr ""
+
 #: src/strings.ts:2469
 msgid "Last used on"
 msgstr "Останнє використання"
@@ -4545,8 +4557,8 @@ msgid "Learn more about Monographs"
 msgstr "Докладніше про монографії"
 
 #: src/strings.ts:245
-msgid "Learn more about Notesnook Monograph"
-msgstr "Докладніше про Notesnook Monograph"
+msgid "Learn more about my-NoteBook Monograph"
+msgstr "Докладніше про my-NoteBook Monograph"
 
 #: src/strings.ts:592
 msgid "Least relevant first"
@@ -4561,12 +4573,12 @@ msgid "Legal"
 msgstr "Правова інформація"
 
 #: src/strings.ts:428
-msgid "Let us know if you have faced any issue/bug while using Notesnook. We will try to fix it as soon as possible."
-msgstr "Повідомте нам, якщо ви натрапили на проблему чи помилку під час використання Notesnook. Ми спробуємо виправити її якнайшвидше."
+msgid "Let us know if you have faced any issue/bug while using my-NoteBook. We will try to fix it as soon as possible."
+msgstr "Повідомте нам, якщо ви натрапили на проблему чи помилку під час використання my-NoteBook. Ми спробуємо виправити її якнайшвидше."
 
 #: src/strings.ts:2832
-msgid "Let's look back at your year in Notesnook"
-msgstr "Згадаймо ваш рік у Notesnook"
+msgid "Let's look back at your year in my-NoteBook"
+msgstr "Згадаймо ваш рік у my-NoteBook"
 
 #: src/strings.ts:2763
 msgid "Level up with more storage."
@@ -4779,8 +4791,8 @@ msgid "Login to encrypt and sync notes"
 msgstr "Увійдіть, щоб шифрувати та синхронізувати нотатки"
 
 #: src/strings.ts:2392
-msgid "Login to upload attachments. [Read more](https://notesnook.com/help/faqs/login-to-upload-attachments)"
-msgstr "Увійдіть, щоб завантажувати вкладення. [Докладніше](https://notesnook.com/help/faqs/login-to-upload-attachments)"
+msgid "Login to upload attachments."
+msgstr ""
 
 #: src/strings.ts:492
 msgid "Login to your account"
@@ -5076,6 +5088,62 @@ msgstr "Перемістити до кошика"
 msgid "Multi-layer encryption to most important notes"
 msgstr "Багаторівневе шифрування для найважливіших нотаток"
 
+#: src/strings.ts:2319
+msgid "my-NoteBook"
+msgstr "my-NoteBook"
+
+#: src/strings.ts:2380
+msgid "my-NoteBook Circle"
+msgstr "my-NoteBook Circle"
+
+#: src/strings.ts:2382
+msgid "my-NoteBook Circle brings together trusted partners who share our commitment to privacy, transparency, and user freedom."
+msgstr "my-NoteBook Circle об'єднує надійних партнерів, які поділяють нашу відданість приватності, прозорості та свободі користувачів."
+
+#: src/strings.ts:2988
+msgid "my-NoteBook detected that it is running under ARM64 translation. For the best performance, please download the ARM64 build of my-NoteBook from our website."
+msgstr "my-NoteBook виявив, що працює в режимі емуляції ARM64. Для максимальної продуктивності завантажте збірку ARM64 з нашого сайту."
+
+#: src/strings.ts:1945
+msgid "my-NoteBook Importer"
+msgstr "my-NoteBook Importer"
+
+#: src/strings.ts:3060
+msgid "my-NoteBook is available on all major platforms — for everyone."
+msgstr "my-NoteBook доступний на всіх основних платформах — для кожного."
+
+#: src/strings.ts:970
+msgid "my-NoteBook Pro"
+msgstr "my-NoteBook Pro"
+
+#: src/strings.ts:1974
+msgid ""
+"my-NoteBook uses the following DNS providers:\n"
+"\n"
+"1. Cloudflare DNS\n"
+"2. Quad9\n"
+"\n"
+"This can sometimes bypass local ISP blockages on my-NoteBook traffic. Disable this if you want the app to use system's DNS settings."
+msgstr ""
+"my-NoteBook використовує таких DNS-провайдерів:\n"
+"\n"
+"1. Cloudflare DNS\n"
+"2. Quad9\n"
+"\n"
+"Це інколи дає змогу обійти локальні блокування трафіку my-NoteBook з боку провайдера. Вимкніть, якщо хочете, щоб застосунок використовував системні налаштування DNS."
+
+#: src/strings.ts:898
+msgid "my-NoteBook will send you a 2FA code on your email when prompted"
+msgstr "my-NoteBook надішле вам код 2FA на електронну пошту за запитом"
+
+#: src/strings.ts:905
+msgid "my-NoteBook will send you an SMS with a 2FA code when prompted"
+msgstr "my-NoteBook надішле вам SMS із кодом 2FA за запитом"
+
+#: src/strings.ts:3163
+msgid "MY-NOTEBOOK WRAPPED {year}"
+msgstr "MY-NOTEBOOK ПІДСУМКИ {year}"
+
 #: src/strings.ts:810
 msgid "Name"
 msgstr "Ім'я"
@@ -5180,6 +5248,10 @@ msgstr "Нові нотатки будуть без категорії"
 msgid "Next"
 msgstr "Далі"
 
+#: src/strings.ts:3280
+msgid "Next full backup: {date}"
+msgstr ""
+
 #: src/strings.ts:2174
 msgid "Next match"
 msgstr "Наступний збіг"
@@ -5187,6 +5259,10 @@ msgstr "Наступний збіг"
 #: src/strings.ts:2857
 msgid "Next month"
 msgstr "Наступного місяця"
+
+#: src/strings.ts:3281
+msgid "Next partial backup: {date}"
+msgstr ""
 
 #: src/strings.ts:2220
 msgid "Next tab"
@@ -5412,62 +5488,6 @@ msgstr "Нотаток на місяць"
 msgid "notes this year"
 msgstr "нотаток цього року"
 
-#: src/strings.ts:2319
-msgid "Notesnook"
-msgstr "Notesnook"
-
-#: src/strings.ts:2380
-msgid "Notesnook Circle"
-msgstr "Notesnook Circle"
-
-#: src/strings.ts:2382
-msgid "Notesnook Circle brings together trusted partners who share our commitment to privacy, transparency, and user freedom."
-msgstr "Notesnook Circle об'єднує надійних партнерів, які поділяють нашу відданість приватності, прозорості та свободі користувачів."
-
-#: src/strings.ts:2988
-msgid "Notesnook detected that it is running under ARM64 translation. For the best performance, please download the ARM64 build of Notesnook from our website."
-msgstr "Notesnook виявив, що працює в режимі емуляції ARM64. Для максимальної продуктивності завантажте збірку ARM64 з нашого сайту."
-
-#: src/strings.ts:1945
-msgid "Notesnook Importer"
-msgstr "Notesnook Importer"
-
-#: src/strings.ts:3060
-msgid "Notesnook is available on all major platforms — for everyone."
-msgstr "Notesnook доступний на всіх основних платформах — для кожного."
-
-#: src/strings.ts:970
-msgid "Notesnook Pro"
-msgstr "Notesnook Pro"
-
-#: src/strings.ts:1974
-msgid ""
-"Notesnook uses the following DNS providers:\n"
-"\n"
-"1. Cloudflare DNS\n"
-"2. Quad9\n"
-"\n"
-"This can sometimes bypass local ISP blockages on Notesnook traffic. Disable this if you want the app to use system's DNS settings."
-msgstr ""
-"Notesnook використовує таких DNS-провайдерів:\n"
-"\n"
-"1. Cloudflare DNS\n"
-"2. Quad9\n"
-"\n"
-"Це інколи дає змогу обійти локальні блокування трафіку Notesnook з боку провайдера. Вимкніть, якщо хочете, щоб застосунок використовував системні налаштування DNS."
-
-#: src/strings.ts:898
-msgid "Notesnook will send you a 2FA code on your email when prompted"
-msgstr "Notesnook надішле вам код 2FA на електронну пошту за запитом"
-
-#: src/strings.ts:905
-msgid "Notesnook will send you an SMS with a 2FA code when prompted"
-msgstr "Notesnook надішле вам SMS із кодом 2FA за запитом"
-
-#: src/strings.ts:3163
-msgid "NOTESNOOK WRAPPED {year}"
-msgstr "NOTESNOOK ПІДСУМКИ {year}"
-
 #: src/strings.ts:3143
 msgid "Notice"
 msgstr "Повідомлення"
@@ -5597,8 +5617,8 @@ msgid "Open source"
 msgstr "Відкритий код"
 
 #: src/strings.ts:1189
-msgid "Open source libraries used in Notesnook"
-msgstr "Бібліотеки з відкритим кодом, що використовуються в Notesnook"
+msgid "Open source libraries used in my-NoteBook"
+msgstr "Бібліотеки з відкритим кодом, що використовуються в my-NoteBook"
 
 #: src/strings.ts:1188
 msgid "Open source licenses"
@@ -5750,8 +5770,8 @@ msgid "PDF is password protected"
 msgstr "PDF захищено паролем"
 
 #: src/strings.ts:3122
-msgid "Personalize & make Notesnook your own"
-msgstr "Персоналізуйте та налаштуйте Notesnook під себе"
+msgid "Personalize & make my-NoteBook your own"
+msgstr "Персоналізуйте та налаштуйте my-NoteBook під себе"
 
 #: src/strings.ts:1203
 msgid "Phone model"
@@ -6279,12 +6299,12 @@ msgid "Quote"
 msgstr "Цитата"
 
 #: src/strings.ts:1261
-msgid "Rate Notesnook on App Store"
-msgstr "Оцініть Notesnook в App Store"
+msgid "Rate my-NoteBook on App Store"
+msgstr "Оцініть my-NoteBook в App Store"
 
 #: src/strings.ts:1262
-msgid "Rate Notesnook on Play Store"
-msgstr "Оцініть Notesnook у Play Store"
+msgid "Rate my-NoteBook on Play Store"
+msgstr "Оцініть my-NoteBook у Play Store"
 
 #: src/strings.ts:536
 msgid "Rate now (It takes only a second)"
@@ -6299,8 +6319,8 @@ msgid "Read only"
 msgstr "Лише для читання"
 
 #: src/strings.ts:1166
-msgid "Read the documentation to learn more about Notesnook"
-msgstr "Прочитайте документацію, щоб дізнатися більше про Notesnook"
+msgid "Read the documentation to learn more about my-NoteBook"
+msgstr "Прочитайте документацію, щоб дізнатися більше про my-NoteBook"
 
 #: src/strings.ts:1187
 msgid "Read the privacy policy"
@@ -6501,8 +6521,8 @@ msgid "Reminders"
 msgstr "Нагадування"
 
 #: src/strings.ts:1280
-msgid "Reminders cannot be set because notifications have been disabled from app settings. If you want to keep receiving reminder notifications, enable notifications for Notesnook from app settings."
-msgstr "Нагадування не можна встановити, оскільки сповіщення вимкнено в налаштуваннях застосунку. Якщо ви хочете й надалі отримувати сповіщення про нагадування, увімкніть сповіщення для Notesnook у налаштуваннях застосунку."
+msgid "Reminders cannot be set because notifications have been disabled from app settings. If you want to keep receiving reminder notifications, enable notifications for my-NoteBook from app settings."
+msgstr "Нагадування не можна встановити, оскільки сповіщення вимкнено в налаштуваннях застосунку. Якщо ви хочете й надалі отримувати сповіщення про нагадування, увімкніть сповіщення для my-NoteBook у налаштуваннях застосунку."
 
 #: src/strings.ts:1775
 msgid "Reminders will not be active on this device as it does not support notifications."
@@ -7058,8 +7078,8 @@ msgid "Security key successfully registered."
 msgstr "Ключ безпеки успішно зареєстровано."
 
 #: src/strings.ts:1195
-msgid "See what the future of Notesnook is going to be like."
-msgstr "Дізнайтеся, яким буде майбутнє Notesnook."
+msgid "See what the future of my-NoteBook is going to be like."
+msgstr "Дізнайтеся, яким буде майбутнє my-NoteBook."
 
 #: src/strings.ts:1233
 msgid "Select"
@@ -7110,8 +7130,8 @@ msgid "Select day of the week to repeat the reminder."
 msgstr "Виберіть день тижня для повторення нагадування."
 
 #: src/strings.ts:1487
-msgid "Select folder where Notesnook backup files are stored to view and restore them from the app"
-msgstr "Виберіть папку, у якій зберігаються файли резервних копій Notesnook, щоб переглядати та відновлювати їх із застосунку"
+msgid "Select folder where my-NoteBook backup files are stored to view and restore them from the app"
+msgstr "Виберіть папку, у якій зберігаються файли резервних копій my-NoteBook, щоб переглядати та відновлювати їх із застосунку"
 
 #: src/strings.ts:1488
 msgid "Select folder with backup files"
@@ -7162,8 +7182,8 @@ msgid "Select the languages the spell checker should check in."
 msgstr "Виберіть мови, які має перевіряти перевірка правопису."
 
 #: src/strings.ts:2235
-msgid "Select the release track for Notesnook."
-msgstr "Виберіть канал випусків для Notesnook."
+msgid "Select the release track for my-NoteBook."
+msgstr "Виберіть канал випусків для my-NoteBook."
 
 #: src/strings.ts:210
 msgid "SELECTED NOTE"
@@ -7395,17 +7415,17 @@ msgstr "Поділитися"
 msgid "Share backup"
 msgstr "Поділитися резервною копією"
 
+#: src/strings.ts:1646
+msgid "Share my-NoteBook with friends!"
+msgstr "Поділіться my-NoteBook із друзями!"
+
 #: src/strings.ts:406
 msgid "Share note"
 msgstr "Поділитися нотаткою"
 
-#: src/strings.ts:1646
-msgid "Share Notesnook with friends!"
-msgstr "Поділіться Notesnook із друзями!"
-
 #: src/strings.ts:2424
-msgid "Share things to Notesnook from anywhere using the Inbox API"
-msgstr "Надсилайте матеріали до Notesnook звідусіль за допомогою API вхідних"
+msgid "Share things to my-NoteBook from anywhere using the Inbox API"
+msgstr "Надсилайте матеріали до my-NoteBook звідусіль за допомогою API вхідних"
 
 #: src/strings.ts:541
 msgid "Share to cloud"
@@ -7965,8 +7985,8 @@ msgid "Thank you for the purchase"
 msgstr "Дякуємо за покупку"
 
 #: src/strings.ts:431
-msgid "Thank you for updating Notesnook! We will be applying some minor changes for a better note taking experience."
-msgstr "Дякуємо, що оновили Notesnook! Ми внесемо невеликі зміни, щоб покращити роботу з нотатками."
+msgid "Thank you for updating my-NoteBook! We will be applying some minor changes for a better note taking experience."
+msgstr "Дякуємо, що оновили my-NoteBook! Ми внесемо невеликі зміни, щоб покращити роботу з нотатками."
 
 #: src/strings.ts:1867
 msgid "Thank you for your feedback!"
@@ -7993,12 +8013,12 @@ msgid "The API key allows you to access NN's inbox functionality."
 msgstr "Ключ API дозволяє отримати доступ до функцій вхідних повідомлень NN."
 
 #: src/strings.ts:661
-msgid "The default dark theme for the Notesnook app"
-msgstr "Темна тема за замовчуванням для програми Notesnook"
+msgid "The default dark theme for the my-NoteBook app"
+msgstr "Темна тема за замовчуванням для програми my-NoteBook"
 
 #: src/strings.ts:662
-msgid "The default light theme for Notesnook app."
-msgstr "Світла тема за замовчуванням для програми Notesnook."
+msgid "The default light theme for my-NoteBook app."
+msgstr "Світла тема за замовчуванням для програми my-NoteBook."
 
 #: src/strings.ts:2411
 msgid "The incoming note could not be unlocked with the provided password. Enter the correct password for the incoming note"
@@ -8008,13 +8028,13 @@ msgstr "Не вдалося розблокувати вхідну нотатку
 msgid "The information above will be publically available at"
 msgstr "Наведена вище інформація буде загальнодоступною за адресою"
 
+#: src/strings.ts:2386
+msgid "The my-NoteBook Circle is exclusive to subscribers. Please consider subscribing to gain access to my-NoteBook Circle and enjoy additional benefits."
+msgstr "my-NoteBook Circle доступний лише передплатникам. Розгляньте оформлення підписки, щоб отримати доступ до my-NoteBook Circle і додаткові переваги."
+
 #: src/strings.ts:2809
 msgid "The note you are trying to append to has been deleted."
 msgstr "Нотатку, до якої ви намагаєтеся додати вміст, видалено."
-
-#: src/strings.ts:2386
-msgid "The Notesnook Circle is exclusive to subscribers. Please consider subscribing to gain access to Notesnook Circle and enjoy additional benefits."
-msgstr "Notesnook Circle доступний лише передплатникам. Розгляньте оформлення підписки, щоб отримати доступ до Notesnook Circle і додаткові переваги."
 
 #: src/strings.ts:2571
 msgid "The password for decrypting the Colornote backup file."
@@ -8736,12 +8756,12 @@ msgid "Using {instance} (v{version})"
 msgstr "Використовується {instance} (v{version})"
 
 #: src/strings.ts:2585
-msgid "Using Notesnook without an account will **NOT** sync your notes across devices and could result in data loss if you lose access to your device or uninstall the app. Make sure to backup your notes regularly."
-msgstr "Використання Notesnook без облікового запису **НЕ** синхронізуватиме ваші нотатки між пристроями та може призвести до втрати даних, якщо ви втратите доступ до свого пристрою або видалите програму. Регулярно створюйте резервні копії своїх нотаток."
+msgid "Using my-NoteBook without an account will **NOT** sync your notes across devices and could result in data loss if you lose access to your device or uninstall the app. Make sure to backup your notes regularly."
+msgstr "Використання my-NoteBook без облікового запису **НЕ** синхронізуватиме ваші нотатки між пристроями та може призвести до втрати даних, якщо ви втратите доступ до свого пристрою або видалите програму. Регулярно створюйте резервні копії своїх нотаток."
 
 #: src/strings.ts:2049
-msgid "Using official Notesnook instance"
-msgstr "Використовується офіційний екземпляр Notesnook"
+msgid "Using official my-NoteBook instance"
+msgstr "Використовується офіційний екземпляр my-NoteBook"
 
 #: src/strings.ts:1583
 msgid "v{version} available"
@@ -8792,8 +8812,8 @@ msgid "Verify subscription"
 msgstr "Перевірити підписку"
 
 #: src/strings.ts:976
-msgid "Verify your subscription to Notesnook Pro"
-msgstr "Перевірте свою підписку Notesnook Pro"
+msgid "Verify your subscription to my-NoteBook Pro"
+msgstr "Перевірте свою підписку my-NoteBook Pro"
 
 #: src/strings.ts:1746
 msgid "Verifying 2FA code"
@@ -8969,12 +8989,12 @@ msgid "Welcome back!"
 msgstr "З поверненням!"
 
 #: src/strings.ts:2366
-msgid "Welcome to Notesnook {plan}"
-msgstr "Ласкаво просимо до Notesnook {plan}"
+msgid "Welcome to my-NoteBook {plan}"
+msgstr "Ласкаво просимо до my-NoteBook {plan}"
 
 #: src/strings.ts:3266
-msgid "Welcome to Notesnook Beta!"
-msgstr "Ласкаво просимо до Notesnook Beta!"
+msgid "Welcome to my-NoteBook Beta!"
+msgstr "Ласкаво просимо до my-NoteBook Beta!"
 
 #: src/strings.ts:3268
 msgid "Welcome to v{version}"
@@ -9078,8 +9098,8 @@ msgid "Yesterday, {time}"
 msgstr "Вчора, {time}"
 
 #: src/strings.ts:2863
-msgid "You already have a Notesnook subscription. You can change your plan from Settings > Subscription details."
-msgstr "У вас уже є підписка на Notesnook. Ви можете змінити свій план у Налаштування > Деталі підписки."
+msgid "You already have a my-NoteBook subscription. You can change your plan from Settings > Subscription details."
+msgstr "У вас уже є підписка на my-NoteBook. Ви можете змінити свій план у Налаштування > Деталі підписки."
 
 #: src/strings.ts:92
 msgid "You also agree to receive marketing emails from us which you can opt-out of from app settings."
@@ -9102,8 +9122,8 @@ msgid "You are editing #{tag}"
 msgstr "Ви редагуєте #{tag}"
 
 #: src/strings.ts:1640
-msgid "You are logging into the beta version of Notesnook. Switching between beta &amp; stable versions can cause weird issues including data loss. It is recommended that you do not use both simultaneously."
-msgstr "Ви входите в бета-версію Notesnook. Перемикання між бета- &amp; стабільною версіями може спричинити дивні проблеми, включно з втратою даних. Радимо не використовувати обидві одночасно."
+msgid "You are logging into the beta version of my-NoteBook. Switching between beta &amp; stable versions can cause weird issues including data loss. It is recommended that you do not use both simultaneously."
+msgstr "Ви входите в бета-версію my-NoteBook. Перемикання між бета- &amp; стабільною версіями може спричинити дивні проблеми, включно з втратою даних. Радимо не використовувати обидві одночасно."
 
 #: src/strings.ts:1265
 msgid "You are not logged in"
@@ -9118,8 +9138,8 @@ msgid "You are on this plan."
 msgstr "Ви на цьому плані."
 
 #: src/strings.ts:3132
-msgid "You are one step away from unlocking the full potential of Notesnook."
-msgstr "Ви за крок від розкриття повного потенціалу Notesnook."
+msgid "You are one step away from unlocking the full potential of my-NoteBook."
+msgstr "Ви за крок від розкриття повного потенціалу my-NoteBook."
 
 #: src/strings.ts:809
 msgid "You are renaming color {color}"
@@ -9172,17 +9192,8 @@ msgid ""
 "\n"
 "Please note that we will respond to your bug report on the link above. **We recommend that you save the above link for later reference.**\n"
 "\n"
-"If your issue is critical (e.g. notes not syncing, crashes etc.), please [join our Discord community](https://go.notesnook.com/discord) for one-to-one support."
+"If your issue is critical (e.g. notes not syncing, crashes etc.), please mention it in your bug report."
 msgstr ""
-"You can track your bug report at [{url}]({url}).\n"
-"\n"
-"Please note that we will respond to your bug report on the link above. **We recommend that you save the above link for later reference.**\n"
-"\n"
-"If your issue is critical (e.g. notes not syncing, crashes etc.), please [join our Discord community](https://go.notesnook.com/discord) for one-to-one support.Ви можете відстежувати свій звіт про помилку за адресою [{url}]({url}).\n"
-"\n"
-"Зверніть увагу: ми відповімо на ваш звіт за посиланням вище. **Радимо зберегти це посилання на майбутнє.**\n"
-"\n"
-"Якщо ваша проблема критична (наприклад, нотатки не синхронізуються, збої тощо), [приєднуйтеся до нашої спільноти в Discord](https://go.notesnook.com/discord) для індивідуальної підтримки."
 
 #: src/strings.ts:1881
 msgid ""
@@ -9278,45 +9289,42 @@ msgstr "Щоб змінити або скинути URL-адреси серве�
 
 #: src/strings.ts:2506
 msgid ""
-"You need to login to restore attachments from a backup file. [Read more](https://notesnook.com/help/faqs/login-to-restore-attachments-in-backup).\n"
+"You need to login to restore attachments from a backup file.\n"
 "  \n"
 "Continue without attachments?"
 msgstr ""
-"Вам потрібно увійти, щоб відновити вкладення з файлу резервної копії. [Докладніше](https://notesnook.com/help/faqs/login-to-restore-attachments-in-backup).\n"
-"  \n"
-"Продовжити без вкладень?"
 
 #: src/strings.ts:3110
 msgid "You own your notes, not us. No proprietary formats. No vendor lock in. No waiting for hours to download your notes."
 msgstr "Ваші нотатки належать вам, а не нам. Жодних закритих форматів. Жодної прив'язки до постачальника. Жодного багатогодинного очікування на завантаження нотаток."
 
 #: src/strings.ts:761
-msgid "You simply cannot get any better of a note taking app than @notesnook. The UI is clean and slick, it is feature rich, encrypted, reasonably priced (esp. for students & educators) & open source"
-msgstr "Просто не існує застосунку для нотаток кращого за @notesnook. Інтерфейс чистий і елегантний, він багатий на функції, зашифрований, розумно оцінений (особливо для студентів і викладачів) та з відкритим кодом"
+msgid "You simply cannot get any better of a note taking app than this one. The UI is clean and slick, it is feature rich, encrypted, reasonably priced (esp. for students & educators) & open source"
+msgstr ""
 
 #: src/strings.ts:972
-msgid "You subscribed to Notesnook Pro on {date}. Verify this subscription?"
-msgstr "Ви оформили підписку Notesnook Pro {date}. Перевірити цю підписку?"
+msgid "You subscribed to my-NoteBook Pro on {date}. Verify this subscription?"
+msgstr "Ви оформили підписку my-NoteBook Pro {date}. Перевірити цю підписку?"
 
 #: src/strings.ts:644
-msgid "You subscribed to Notesnook Pro on Android Phone/Tablet using Google In App Purchase."
-msgstr "Ви оформили підписку Notesnook Pro на телефоні/планшеті Android через вбудовану покупку Google."
+msgid "You subscribed to my-NoteBook Pro on Android Phone/Tablet using Google In App Purchase."
+msgstr "Ви оформили підписку my-NoteBook Pro на телефоні/планшеті Android через вбудовану покупку Google."
 
 #: src/strings.ts:639
-msgid "You subscribed to Notesnook Pro on iOS using Apple In App Purchase. You can cancel anytime with your iTunes Account settings."
-msgstr "Ви оформили підписку Notesnook Pro на iOS через вбудовану покупку Apple. Скасувати її можна будь-коли в налаштуваннях вашого облікового запису iTunes."
+msgid "You subscribed to my-NoteBook Pro on iOS using Apple In App Purchase. You can cancel anytime with your iTunes Account settings."
+msgstr "Ви оформили підписку my-NoteBook Pro на iOS через вбудовану покупку Apple. Скасувати її можна будь-коли в налаштуваннях вашого облікового запису iTunes."
 
 #: src/strings.ts:648
-msgid "You subscribed to Notesnook Pro on the Web/Desktop App."
-msgstr "Ви оформили підписку Notesnook Pro через веб- або настільний застосунок."
+msgid "You subscribed to my-NoteBook Pro on the Web/Desktop App."
+msgstr "Ви оформили підписку my-NoteBook Pro через веб- або настільний застосунок."
 
 #: src/strings.ts:652
-msgid "You subscribed to Notesnook Pro using a gift card."
-msgstr "Ви оформили підписку Notesnook Pro за допомогою подарункової картки."
+msgid "You subscribed to my-NoteBook Pro using a gift card."
+msgstr "Ви оформили підписку my-NoteBook Pro за допомогою подарункової картки."
 
 #: src/strings.ts:634
-msgid "You were awarded a subscription to Notesnook Pro by Streetwriters."
-msgstr "Streetwriters надала вам підписку Notesnook Pro."
+msgid "You were awarded a subscription to my-NoteBook Pro by Streetwriters."
+msgstr "Streetwriters надала вам підписку my-NoteBook Pro."
 
 #: src/strings.ts:420
 msgid "You will be logged out from all your devices"
@@ -9484,8 +9492,8 @@ msgid "Your plan will be switched to {plan} plan. You will receive a credit for 
 msgstr "Ваш план буде змінено на план «{plan}». Ви отримаєте кредит за невикористаний час попередньої підписки і сплатите лише пропорційну суму за нову підписку."
 
 #: src/strings.ts:757
-msgid "Your privacy matters to us, no matter who you are. In a world where everyone is trying to spy on you, Notesnook encrypts all your data before it leaves your device. With Notesnook no one can ever sell your data again."
-msgstr "Ваша приватність важлива для нас, ким би ви не були. У світі, де всі намагаються за вами стежити, Notesnook шифрує всі ваші дані до того, як вони залишать ваш пристрій. З Notesnook ніхто більше не зможе продати ваші дані."
+msgid "Your privacy matters to us, no matter who you are. In a world where everyone is trying to spy on you, my-NoteBook encrypts all your data before it leaves your device. With my-NoteBook no one can ever sell your data again."
+msgstr "Ваша приватність важлива для нас, ким би ви не були. У світі, де всі намагаються за вами стежити, my-NoteBook шифрує всі ваші дані до того, як вони залишать ваш пристрій. З my-NoteBook ніхто більше не зможе продати ваші дані."
 
 #: src/strings.ts:1208
 msgid "Your profile pictrure is stored 100% end-to-end encrypted and only visible to you."
@@ -9528,8 +9536,8 @@ msgid "Your support request has been forwarded"
 msgstr "Ваш запит до підтримки передано"
 
 #: src/strings.ts:1878
-msgid "Your support request has been forwarded to our support team. We will get back to you via email as soon as possible. If you don't receive an email from us within 24-48 hours, please send us an email directly at support@notesnook.com."
-msgstr "Ваш запит передано нашій команді підтримки. Ми відповімо вам електронною поштою якнайшвидше. Якщо ви не отримаєте від нас листа протягом 24-48 годин, напишіть нам безпосередньо на support@notesnook.com."
+msgid "Your support request has been forwarded to our support team. We will get back to you via email as soon as possible."
+msgstr ""
 
 #: src/strings.ts:2894
 msgid "Your trial has been canceled."

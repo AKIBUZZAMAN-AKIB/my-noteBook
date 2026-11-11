@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { useEffect, useRef, useState } from "react";
 import { CREATE_BUTTON_MAP } from "../common";
-import { ArrowTopRight, Icon, Plus } from "../components/icons";
+import { Icon, Plus } from "../components/icons";
 import Config from "../utils/config";
 import { strings } from "@notesnook/intl";
 
@@ -124,17 +124,7 @@ const getDefaultTips = (): Record<
   },
   favorites: { text: () => strings.favoritesEmpty() },
   monographs: {
-    text: () => strings.monographsEmpty(),
-    button: {
-      title: strings.whatAreMonographs(),
-      icon: ArrowTopRight,
-      onClick() {
-        window.open(
-          "https://notesnook.com/help/publish-notes-with-monographs",
-          "_blank"
-        );
-      }
-    }
+    text: () => strings.monographsEmpty()
   },
   notebooks: {
     text: () => strings.notebooksEmpty(),

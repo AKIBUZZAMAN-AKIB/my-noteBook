@@ -31,7 +31,6 @@ import { isFeatureSupported } from "../../utils/feature-check";
 import { strings } from "@notesnook/intl";
 import { db } from "../../common/db";
 import { createDialect } from "../../common/sqlite";
-import { getDeviceInfo } from "../../utils/platform";
 
 const IGNORED_ERRORS = [
   "Error in input stream",
@@ -161,7 +160,7 @@ export function ErrorComponent({ error, resetErrorBoundary }: FallbackProps) {
               <Text variant="body">{help.action}</Text>
             </>
           ) : null}
-          <Flex sx={{ gap: 1 }}>
+          <Flex sx={{ gap: 1, flexWrap: "wrap" }}>
             {help ? (
               <Button
                 variant="error"
@@ -193,25 +192,6 @@ export function ErrorComponent({ error, resetErrorBoundary }: FallbackProps) {
                 }}
               >
                 {strings.copy()}
-              </Button>
-              <Button
-                variant="secondary"
-                sx={{ alignSelf: "start", px: 30, mt: 1 }}
-                onClick={async () => {
-                  const mailto = new URL("mailto:support@streetwriters.co");
-                  mailto.searchParams.set(
-                    "body",
-                    `${errorToString(error)}
-
----
-Device information:
-
-${getDeviceInfo()}`
-                  );
-                  window.open(mailto.toString(), "_blank");
-                }}
-              >
-                {strings.contactSupport()}
               </Button>
             </>
           </Flex>
@@ -259,9 +239,9 @@ function getErrorHelp(props: FallbackProps) {
   ) {
     return {
       explanation:
-        "Notesnook is already open in another tab or window of this browser (or an older copy is still closing). Your notes can only be open in one tab at a time. Nothing is lost.",
+        "my-NoteBook is already open in another tab or window of this browser (or an older copy is still closing). Your notes can only be open in one tab at a time. Nothing is lost.",
       action:
-        "Close the other Notesnook tabs (or switch to that tab), then tap Fix it to reload this one.",
+        "Close the other my-NoteBook tabs (or switch to that tab), then tap Fix it to reload this one.",
       fix: async () => {
         window.location.reload();
       }

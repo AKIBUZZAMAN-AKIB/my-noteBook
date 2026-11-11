@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 export const DATABASE_IN_USE_ERROR =
-  "DatabaseInUseError: Notesnook is already open in another tab of this browser.";
+  "DatabaseInUseError: my-NoteBook is already open in another tab of this browser.";
 
 const TAKEOVER_TIMEOUT_MS = 10000;
 const NOTICE_ID = "notesnook-opened-elsewhere";
@@ -119,11 +119,11 @@ function showOpenedElsewhereNotice() {
     "font-family:inherit"
   ].join(";");
   const title = document.createElement("h2");
-  title.textContent = "Notesnook is open in another tab";
+  title.textContent = "my-NoteBook is open in another tab";
   title.style.cssText = "margin:0;font-size:20px";
   const body = document.createElement("p");
   body.textContent =
-    "Your notes can only be open in one tab at a time. Close this tab, or tap the button to use Notesnook here.";
+    "Your notes can only be open in one tab at a time. Close this tab, or tap the button to use my-NoteBook here.";
   body.style.cssText = "margin:0;max-width:420px;font-size:14px;opacity:.8";
   const button = document.createElement("button");
   button.textContent = "Use here";
