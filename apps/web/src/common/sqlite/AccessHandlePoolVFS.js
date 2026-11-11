@@ -20,6 +20,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Copyright 2023 Roy T. Hashimoto. All Rights Reserved.
 import * as VFS from "./VFS.js";
 
+// OPFS allows only one open sync access handle per file. When another worker
+// (a previous instance of the app in this or another tab) is still shutting
+// down, it can hold the handles for a short moment, and
+// createSyncAccessHandle fails with NoModificationAllowedError. Wait a little
+// and try again instead of failing right away.
+const ACCESS_HANDLE_RETRY_DELAYS = [50, 100, 200, 400, 800, 1200, 1600, 2000];
+async function createSyncAccessHandleWithRetry(handle) {
+  for (let attempt = 0; ; ++attempt) {
+    try {
+      return await handle.createSyncAccessHandle();
+    } catch (e) {
+      if (
+        e?.name !== "NoModificationAllowedError" ||
+        attempt >= ACCESS_HANDLE_RETRY_DELAYS.length
+      )
+        throw e;
+      await new Promise((resolve) =>
+        setTimeout(resolve, ACCESS_HANDLE_RETRY_DELAYS[attempt])
+      );
+    }
+  }
+}
+
 const SECTOR_SIZE = 4096;
 
 // Each OPFS file begins with a fixed-size header with metadata. The
@@ -266,7 +289,7 @@ export class AccessHandlePoolVFS extends VFS.Base {
       const handle = await this.#directoryHandle.getFileHandle(name, {
         create: true
       });
-      const accessHandle = await handle.createSyncAccessHandle();
+      const accessHandle = await createSyncAccessHandleWithRetry(handle);
       this.#mapAccessHandleToName.set(accessHandle, name);
 
       this.#setAssociatedPath(accessHandle, "", 0);
@@ -307,18 +330,25 @@ export class AccessHandlePoolVFS extends VFS.Base {
     }
 
     // Open access handles in parallel, separating associated and unassociated.
-    await Promise.all(
-      files.map(async ([name, handle]) => {
-        const accessHandle = await handle.createSyncAccessHandle();
-        this.#mapAccessHandleToName.set(accessHandle, name);
-        const path = this.#getAssociatedPath(accessHandle);
-        if (path) {
-          this.#mapPathToAccessHandle.set(path, accessHandle);
-        } else {
-          this.#availableAccessHandles.add(accessHandle);
-        }
-      })
-    );
+    try {
+      await Promise.all(
+        files.map(async ([name, handle]) => {
+          const accessHandle = await createSyncAccessHandleWithRetry(handle);
+          this.#mapAccessHandleToName.set(accessHandle, name);
+          const path = this.#getAssociatedPath(accessHandle);
+          if (path) {
+            this.#mapPathToAccessHandle.set(path, accessHandle);
+          } else {
+            this.#availableAccessHandles.add(accessHandle);
+          }
+        })
+      );
+    } catch (e) {
+      // Don't keep a partial set of handles open: that would block the
+      // instance that really owns the database.
+      this.#releaseAccessHandles();
+      throw e;
+    }
   }
 
   #releaseAccessHandles() {

@@ -30,6 +30,7 @@ import SQLiteAsyncURI from "./wa-sqlite-async.wasm?url";
 import { Mutex } from "async-mutex";
 import { SharedService } from "./shared-service";
 import { Remote, wrap } from "comlink";
+import { acquireTabOwnership } from "./tab-ownership";
 
 type Config = {
   dbName: string;
@@ -231,15 +232,30 @@ export class WaSqliteWorkerSingleTabDriver implements Driver {
   private connection?: DatabaseConnection;
   private connectionMutex = new Mutex();
   private readonly worker;
+  private readonly rawWorker: globalThis.Worker;
 
   constructor(private readonly config: Config) {
     console.log("single tab driver", config.dbName);
-    this.worker = wrap<SQLiteWorker>(
-      new Worker({ name: config.dbName })
-    ) 
+    this.rawWorker = new Worker({ name: config.dbName });
+    this.worker = wrap<SQLiteWorker>(this.rawWorker);
   }
 
   async init(): Promise<void> {
+    // OPFS (sync) databases can only be held by one tab at a time.
+    if (!this.config.async)
+      await acquireTabOwnership(this.config.dbName, async () => {
+        // wait for the running query/transaction to finish, then close
+        // the database so the other tab can open it.
+        await this.connectionMutex.acquire();
+        try {
+          await Promise.race([
+            this.worker.close(),
+            new Promise((resolve) => setTimeout(resolve, 3000))
+          ]);
+        } finally {
+          this.rawWorker.terminate();
+        }
+      });
     await this.worker.open(this.config.dbName, {
       async: this.config.async,
       encrypted: this.config.encrypted,

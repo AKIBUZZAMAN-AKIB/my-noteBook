@@ -252,6 +252,20 @@ function getErrorHelp(props: FallbackProps) {
         resetErrorBoundary();
       }
     };
+  } else if (
+    errorText.includes("DatabaseInUseError") ||
+    errorText.includes("NoModificationAllowedError") ||
+    errorText.includes("Access Handles cannot be created")
+  ) {
+    return {
+      explanation:
+        "Notesnook is already open in another tab or window of this browser (or an older copy is still closing). Your notes can only be open in one tab at a time. Nothing is lost.",
+      action:
+        "Close the other Notesnook tabs (or switch to that tab), then tap Fix it to reload this one.",
+      fix: async () => {
+        window.location.reload();
+      }
+    };
   } else if (errorText.includes("database disk image is malformed")) {
     return {
       explanation: strings.searchIndexCorrupt(),
