@@ -116,21 +116,21 @@ export function UserProfile({ minimal }: Props) {
           gap: 1
         }}
       >
-        <Flex
-          variant="columnCenter"
-          sx={{
-            bg: "shade",
-            size: minimal ? 30 : 40,
-            borderRadius: 80
+        <svg
+          style={{
+            height: minimal ? 30 : 40,
+            width: minimal ? 30 : 40,
+            flexShrink: 0
           }}
+          aria-hidden="true"
         >
-          <UserIcon size={minimal ? 15 : 20} />
-        </Flex>
-        <Flex sx={{ flexDirection: "column" }}>
-          <Text variant={minimal ? "body" : "subtitle"}>
-            {strings.loginMessage()}
+          <use href="#full-logo" />
+        </svg>
+        <Flex sx={{ flexDirection: "column", minWidth: 0 }}>
+          <Text variant={minimal ? "body" : "subtitle"}>my-NoteBook</Text>
+          <Text variant={"subBody"}>
+            Your notes are saved only on this device, encrypted in this browser.
           </Text>
-          <Text variant={"subBody"}>{strings.loginMessageActionText()}</Text>
         </Flex>
       </Flex>
     );

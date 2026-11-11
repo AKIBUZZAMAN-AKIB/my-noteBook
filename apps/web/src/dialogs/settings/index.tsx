@@ -20,29 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { Flex, Text, Button, Input, Switch } from "@theme-ui/components";
 import Dialog from "../../components/dialog";
 import {
-  About,
   Account,
   Appearance,
   Backup,
   Behaviour,
   CellphoneLock,
   Desktop,
-  Documentation,
   Editor,
-  Import,
-  Legal,
   Loading,
-  Notification,
-  PasswordAndAuth,
-  Privacy,
-  Pro,
-  Servers,
   ShieldLock,
-  Sync,
-  Inbox,
-  CircleEmpty,
   ArrowLeft,
-  Close
+  Close,
+  FileDocument
 } from "../../components/icons";
 import useMobile from "../../hooks/use-mobile";
 import NavigationItem from "../../components/navigation-menu/navigation-item";
@@ -57,78 +46,36 @@ import {
   SettingsGroup
 } from "./types";
 import { ProfileSettings } from "./profile-settings";
-import { AuthenticationSettings } from "./auth-settings";
 import { useStore as useUserStore } from "../../stores/user-store";
-import { SyncSettings } from "./sync-settings";
 import { BehaviourSettings } from "./behaviour-settings";
 import { DesktopIntegrationSettings } from "./desktop-integration-settings";
-import { NotificationsSettings } from "./notifications-settings";
 
 import { BackupExportSettings } from "./backup-export-settings";
-import { ImporterSettings } from "./importer-settings";
 import { VaultSettings } from "./vault-settings";
-import { PrivacySettings } from "./privacy-settings";
 import { EditorSettings } from "./editor-settings";
-import {
-  AboutSettings,
-  LegalSettings,
-  SupportSettings
-} from "./other-settings";
 import { AppearanceSettings } from "./appearance-settings";
 import { debounce, useIsFeatureAvailable, usePromise } from "@notesnook/common";
-import { SubscriptionSettings } from "./subscription-settings";
 import { ScopedThemeProvider } from "../../components/theme-provider";
 import { AppLockSettings } from "./app-lock-settings";
 import { BaseDialogProps, DialogManager } from "../../common/dialog-manager";
-import { ServersSettings } from "./servers-settings";
 import { strings } from "@notesnook/intl";
 import { mdToHtml } from "../../utils/md";
-import { InboxSettings } from "./inbox-settings";
 import { withFeatureCheck } from "../../common";
-import { NotesnookCircleSettings } from "./notesnook-circle-settings";
 import { hashNavigate } from "../../navigation";
 
 type SettingsDialogProps = BaseDialogProps<false> & {
   activeSection?: SectionKeys;
 };
 
+// my-NoteBook is a local-only app: account, sync, subscription, server,
+// notification, importer, privacy and "Other" (legal/help/about) sections
+// have been removed. A single "Open source licenses" item is shown at the
+// bottom of the section list instead (see LicensesLink / LicensesScreen).
 const sectionGroups: SectionGroup[] = [
   {
     key: "account",
     title: strings.account(),
-    sections: [
-      { key: "profile", title: strings.profile(), icon: Account },
-      {
-        key: "subscription",
-        title: strings.subDetails(),
-        icon: Pro,
-        isHidden: () => !useUserStore.getState().isLoggedIn
-      },
-      {
-        key: "auth",
-        title: strings.authentication(),
-        icon: PasswordAndAuth,
-        isHidden: () => !useUserStore.getState().isLoggedIn
-      },
-      {
-        key: "sync",
-        title: strings.sync(),
-        icon: Sync,
-        isHidden: () => !useUserStore.getState().isLoggedIn
-      },
-      {
-        key: "circle",
-        title: strings.notesnookCircle(),
-        icon: CircleEmpty,
-        isHidden: () => !useUserStore.getState().isLoggedIn
-      },
-      {
-        key: "inbox",
-        title: strings.inbox(),
-        icon: Inbox,
-        isHidden: () => !useUserStore.getState().isLoggedIn
-      }
-    ]
+    sections: [{ key: "profile", title: strings.profile(), icon: Account }]
   },
   {
     key: "customization",
@@ -142,21 +89,14 @@ const sectionGroups: SectionGroup[] = [
         title: strings.desktopIntegration(),
         icon: Desktop,
         isHidden: () => !IS_DESKTOP_APP
-      },
-      {
-        key: "notifications",
-        title: strings.notifications(),
-        icon: Notification
-      },
-      { key: "servers", title: strings.servers(), icon: Servers }
+      }
     ]
   },
   {
     key: "import-export",
     title: strings.importExport(),
     sections: [
-      { key: "backup-export", title: strings.backupExport(), icon: Backup },
-      { key: "importer", title: strings.notesnookImporter(), icon: Import }
+      { key: "backup-export", title: strings.backupExport(), icon: Backup }
     ]
   },
   {
@@ -164,42 +104,38 @@ const sectionGroups: SectionGroup[] = [
     title: strings.privacyAndSecurity(),
     sections: [
       { key: "app-lock", title: strings.appLock(), icon: CellphoneLock },
-      { key: "vault", title: strings.vault(), icon: ShieldLock },
-      { key: "privacy", title: strings.privacy(), icon: Privacy }
+      { key: "vault", title: strings.vault(), icon: ShieldLock }
     ]
-  },
+  }
+];
+
+// Not part of the section list: opened from the small link at the bottom.
+const LICENSES_TITLE = "Open source licenses";
+const licensesSection: Section = {
+  key: "legal",
+  title: LICENSES_TITLE,
+  icon: FileDocument
+};
+
+const LicensesSettings: SettingsGroup[] = [
   {
-    key: "other",
-    title: strings.other(),
-    sections: [
-      { key: "legal", title: strings.legal(), icon: Legal },
-      { key: "support", title: strings.helpAndSupport(), icon: Documentation },
-      { key: "about", title: strings.about(), icon: About }
-    ]
+    key: "open-source-licenses",
+    section: "legal",
+    header: () => <LicensesScreen />,
+    settings: []
   }
 ];
 
 const SettingsGroups = [
   ...ProfileSettings,
-  ...AuthenticationSettings,
-  ...SyncSettings,
   ...AppearanceSettings,
   ...BehaviourSettings,
   ...DesktopIntegrationSettings,
-  ...NotificationsSettings,
   ...BackupExportSettings,
-  ...ImporterSettings,
   ...AppLockSettings,
   ...VaultSettings,
-  ...PrivacySettings,
   ...EditorSettings,
-  ...LegalSettings,
-  ...SupportSettings,
-  ...AboutSettings,
-  ...SubscriptionSettings,
-  ...ServersSettings,
-  ...InboxSettings,
-  ...NotesnookCircleSettings
+  ...LicensesSettings
 ];
 
 // Thoughts:
@@ -217,20 +153,26 @@ const SettingsGroups = [
 export const SettingsDialog = DialogManager.register(function SettingsDialog(
   props: SettingsDialogProps
 ) {
+  // sections that were removed (e.g. old links to /settings/servers) fall back
+  // to the default screen instead of showing an empty page.
+  const activeSection =
+    props.activeSection && findSection(props.activeSection)
+      ? props.activeSection
+      : undefined;
   const [activeSettings, setActiveSettings] = useState<SettingsGroup[]>(
     SettingsGroups.filter(
-      (g) => g.section === (props.activeSection || "profile")
+      (g) => g.section === (activeSection || "profile")
     )
   );
   const isMobile = useMobile();
   // On phones the menu and the settings are shown as two separate screens
   // (list -> detail), like a native settings app.
   const [mobileScreen, setMobileScreen] = useState<"menu" | "section">(
-    props.activeSection ? "section" : "menu"
+    activeSection ? "section" : "menu"
   );
   const [isSearching, setIsSearching] = useState(false);
   const [route, setRoute] = useState<SectionKeys>(
-    props.activeSection || "profile"
+    activeSection || "profile"
   );
 
   const content = (
@@ -542,9 +484,118 @@ function SettingsSideBar(props: SettingsSideBarProps) {
               )}
             </Flex>
           ))}
+          {isMobile && isSearching ? null : (
+            <LicensesLink
+              selected={route === "legal"}
+              onClick={() => {
+                onNavigate(SettingsGroups.filter((g) => g.section === "legal"));
+                setRoute("legal");
+                onRouteChange?.("legal");
+              }}
+            />
+          )}
         </Flex>
       </ScopedThemeProvider>
     </FlexScrollContainer>
+  );
+}
+
+// GPL-3.0 section 5 asks interactive programs to show "Appropriate Legal
+// Notices". my-NoteBook keeps exactly one small item for that at the very
+// bottom of Settings; the notice itself lives on its own screen.
+const SOURCE_CODE_URL = "https://github.com/AKIBUZZAMAN-AKIB/my-noteBook";
+const LICENSE_TEXT_URL = "https://www.gnu.org/licenses/gpl-3.0.html";
+
+function LicensesLink(props: { selected: boolean; onClick: () => void }) {
+  return (
+    <Button
+      variant="secondary"
+      data-test-id="open-source-licenses"
+      onClick={props.onClick}
+      sx={{
+        alignSelf: "flex-start",
+        bg: "transparent",
+        mx: 2,
+        mt: 2,
+        mb: 3,
+        px: 1,
+        py: "2px",
+        color: props.selected ? "accent" : "paragraph-secondary",
+        fontSize: "0.75rem",
+        fontWeight: "normal",
+        textDecoration: "underline",
+        ":hover": { bg: "transparent", color: "accent" }
+      }}
+    >
+      {LICENSES_TITLE}
+    </Button>
+  );
+}
+
+function LicensesScreen() {
+  const linkStyle = {
+    color: "var(--accent)",
+    textDecoration: "underline",
+    fontSize: "inherit"
+  };
+  return (
+    <Flex
+      data-test-id="licenses-screen"
+      sx={{ flexDirection: "column", gap: 3, maxWidth: 640 }}
+    >
+      <Text
+        variant="subBody"
+        sx={{
+          fontSize: 11,
+          fontWeight: "bold",
+          letterSpacing: 0.3,
+          color: "accent"
+        }}
+      >
+        {LICENSES_TITLE.toUpperCase()}
+      </Text>
+      <Text variant="body" sx={{ fontWeight: "medium", color: "heading" }}>
+        my-NoteBook
+      </Text>
+      <Text as="p" variant="body" sx={{ color: "paragraph" }}>
+        Copyright (C) 2023 Streetwriters (Private) Limited
+        <br />
+        Modifications copyright (C) 2026 AKIBUZZAMAN AKIB
+      </Text>
+      <Text as="p" variant="body" sx={{ color: "paragraph" }}>
+        This app is a modified version of software by Streetwriters (Private)
+        Limited. It is free software: you can redistribute it and/or modify it
+        under the terms of the GNU General Public License as published by the
+        Free Software Foundation, either version 3 of the License, or (at your
+        option) any later version.
+      </Text>
+      <Text as="p" variant="body" sx={{ color: "paragraph" }}>
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details.
+      </Text>
+      <Flex
+        sx={{ flexDirection: "column", gap: 2, fontFamily: "body", fontSize: "body" }}
+      >
+        <a
+          href={SOURCE_CODE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={linkStyle}
+        >
+          Source code
+        </a>
+        <a
+          href={LICENSE_TEXT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={linkStyle}
+        >
+          GNU General Public License v3
+        </a>
+      </Flex>
+    </Flex>
   );
 }
 
@@ -663,9 +714,6 @@ function SettingItem(props: { item: Setting }) {
             >
               {item.title}
             </Text>
-            {feature && !feature.isAllowed ? (
-              <Pro size={14} color="orange" />
-            ) : null}
           </Flex>
           {item.description && (
             <Text
@@ -885,6 +933,7 @@ function NumberInput({
 }
 
 function findSection(key: SectionKeys) {
+  if (key === licensesSection.key) return licensesSection;
   for (const group of sectionGroups) {
     const section = group.sections.find((s) => s.key === key);
     if (section) return section;

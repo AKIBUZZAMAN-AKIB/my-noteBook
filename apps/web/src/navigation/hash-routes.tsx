@@ -23,22 +23,18 @@ import {
   AddNotebookDialog,
   EditNotebookDialog
 } from "../dialogs/add-notebook-dialog";
-import { EmailVerificationDialog } from "../dialogs/email-verification-dialog";
 import { SettingsDialog } from "../dialogs/settings";
-import { BuyDialog } from "../dialogs/buy-dialog";
 import {
   AddReminderDialog,
   EditReminderDialog
 } from "../dialogs/add-reminder-dialog";
-import { FeatureDialog } from "../dialogs/feature-dialog";
 import { CreateTagDialog } from "../dialogs/item-dialog";
-import { OnboardingDialog } from "../dialogs/onboarding-dialog";
 import { isSectionKey, SectionKeys } from "../dialogs/settings/types";
 
 const hashroutes = defineHashRoutes({
   "/": () => {},
   "/email/verify": () => {
-    EmailVerificationDialog.show({}).then(afterAction);
+    afterAction(); // my-NoteBook: no accounts
   },
   "/notebooks/create": () => {
     AddNotebookDialog.show({}).then(afterAction);
@@ -56,16 +52,17 @@ const hashroutes = defineHashRoutes({
     CreateTagDialog.show().then(afterAction);
   },
   "/buy": () => {
-    BuyDialog.show({}).then(afterAction);
+    afterAction(); // my-NoteBook: no plans or purchases
   },
   "/buy/:code": ({ code }: { code: string }) => {
-    BuyDialog.show({ couponCode: code }).then(afterAction);
+    void code;
+    afterAction(); // my-NoteBook: no plans or purchases
   },
   "/welcome": () => {
-    OnboardingDialog.show({})?.then(afterAction);
+    afterAction(); // my-NoteBook: no onboarding upsell
   },
   "/confirmed": () => {
-    FeatureDialog.show({ featureName: "confirmed" }).then(afterAction);
+    afterAction(); // my-NoteBook: no accounts
   },
   "/settings": () => {
     SettingsDialog.show({}).then(afterAction);

@@ -143,9 +143,6 @@ export function CustomizeToolbar() {
               >
                 {preset.title}
               </span>
-              {preset.id === "custom" && !customToolbarPreset?.isAllowed ? (
-                <Pro color="orange" size={18} sx={{ ml: 1 }} />
-              ) : null}
             </Label>
           ))}
         </Flex>

@@ -111,11 +111,13 @@ function ThemesList() {
   const items = [
     {
       ...darkTheme,
+      authors: [{ name: "Built-in" }],
       description: strings.defaultDarkThemeDesc(),
       previewColors: getPreviewColors(darkTheme)
     },
     {
       ...lightTheme,
+      authors: [{ name: "Built-in" }],
       description: strings.defaultLightThemeDesc(),
       previewColors: getPreviewColors(lightTheme)
     },
