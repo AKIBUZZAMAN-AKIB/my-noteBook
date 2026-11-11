@@ -146,17 +146,6 @@ const staticCommands: Command[] = [
     type: "command"
   },
   {
-    id: "monographs",
-    title: strings.dataTypesPluralCamelCase.monograph(),
-    icon: ArrowTopRight,
-    action: () => {
-      useAppStore.getState().setNavigationTab("home");
-      navigate("/monographs");
-    },
-    group: strings.navigate(),
-    type: "command"
-  },
-  {
     id: "trash",
     title: strings.trash(),
     icon: ArrowTopRight,
@@ -172,14 +161,6 @@ const staticCommands: Command[] = [
     title: strings.settings(),
     icon: ArrowTopRight,
     action: () => hashNavigate("/settings", { replace: true }),
-    group: strings.navigate(),
-    type: "command"
-  },
-  {
-    id: "help",
-    title: strings.helpAndSupport(),
-    icon: ArrowTopRight,
-    action: () => (window.location.href = "https://notesnook.com/help"),
     group: strings.navigate(),
     type: "command"
   },

@@ -588,7 +588,7 @@ function BackupRecoveryCodes(props: TwoFactorEnabledProps) {
         action: async () => {
           if (!recoveryCodesRef.current) return;
           await exportToPDF(
-            "Notesnook 2FA Recovery Codes",
+            "my-NoteBook 2FA Recovery Codes",
             recoveryCodesRef.current.outerHTML
           );
         }
@@ -616,7 +616,7 @@ function BackupRecoveryCodes(props: TwoFactorEnabledProps) {
         action: () => {
           FileSaver.saveAs(
             new Blob([Buffer.from(codes.join("\n"))]),
-            `notesnook-recovery-codes.txt`
+            `my-notebook-recovery-codes.txt`
           );
         }
       },

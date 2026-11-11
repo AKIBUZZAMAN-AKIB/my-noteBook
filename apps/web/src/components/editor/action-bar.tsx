@@ -141,7 +141,7 @@ export function EditorActionBar() {
     {
       title: isNotePublished ? strings.published() : strings.publish(),
       icon: isNotePublished ? Published : Publish,
-      hidden: !isLoggedIn,
+      hidden: true, // my-NoteBook: publishing needs the Notesnook servers
       hideOnMobile: true,
       enabled:
         activeSession &&

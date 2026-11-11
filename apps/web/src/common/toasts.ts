@@ -19,20 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { FeatureResult } from "@notesnook/common";
 import { showToast } from "../utils/toast";
-import { UpgradeDialog } from "../dialogs/buy-dialog/upgrade-dialog";
-import { strings } from "@notesnook/intl";
 
+// my-NoteBook has no plans or purchases: just explain why the action failed.
 export function showFeatureNotAllowedToast(
   result: FeatureResult<any> | undefined
 ) {
   if (!result) return;
-  showToast("error", result.error, [
-    {
-      text: strings.upgradeNow(),
-      onClick: () =>
-        UpgradeDialog.show({
-          feature: result
-        })
-    }
-  ]);
+  showToast("error", result.error);
 }

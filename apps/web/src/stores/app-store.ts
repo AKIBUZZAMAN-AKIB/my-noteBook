@@ -135,6 +135,8 @@ class AppStore extends BaseStore<AppStore> {
       if (status === "offline") {
         await this.abortSync("offline");
       } else {
+        // my-NoteBook: nothing to sync (and no server to ping) without an account
+        if (!(await db.user.getUser())) return;
         // a slight delay to make sure sockets are open and can be connected
         // to. Otherwise, this fails miserably.
         await networkCheck.waitForInternet();
@@ -146,6 +148,7 @@ class AppStore extends BaseStore<AppStore> {
     onPageVisibilityChanged(async (_, documentHidden) => {
       if (documentHidden) return;
 
+      if (!(await db.user.getUser())) return;
       logger.info("Page visibility changed. Reconnecting SSE...");
       await this.get().sync({ type: "full" });
       await db.connectSSE({ force: false }).catch(logger.error);
@@ -299,6 +302,8 @@ class AppStore extends BaseStore<AppStore> {
   };
 
   sync = async (options: SyncOptions = { type: "full", force: false }) => {
+    // my-NoteBook is local-only: never contact a sync server without an account
+    if (!(await db.user.getUser())) return;
     if (this.isSyncing() || !this.get().isSyncEnabled) {
       logger.info("Ignoring duplicate sync", {
         options,

@@ -146,13 +146,6 @@ const routes: Route[] = [
     path: "/reminders",
     icon: Reminders
   },
-  {
-    id: "monographs",
-    title: strings.routes.Monographs(),
-    path: "/monographs",
-    icon: Monographs,
-    loginRequired: true
-  },
   { id: "trash", title: strings.routes.Trash(), path: "/trash", icon: Trash },
   {
     id: "archive",
@@ -350,7 +343,7 @@ function NavigationMenu({
                 display: "block"
               }}
             >
-              Notesnook
+              my-NoteBook
             </Text>
           </Flex>
           <Flex sx={{ gap: "small", alignItems: "center" }}>
@@ -475,7 +468,8 @@ function NavigationMenu({
           </FlexScrollContainer>
         </Freeze>
       </Flex>
-      {currentTab.id === "home" && !isCollapsed && shouldShowWrapped() ? (
+      {/* my-NoteBook: no server-side "year in review" promo */}
+      {false && currentTab.id === "home" && !isCollapsed && shouldShowWrapped() ? (
         <Button
           variant="accent"
           sx={{ m: 2 }}
@@ -897,37 +891,12 @@ function NavigationDropdown() {
             },
             {
               type: "button",
-              title: strings.upgradeToPro(),
-              icon: Pro.path,
-              key: "upgrade",
-              onClick: () => BuyDialog.show({}),
-              isHidden: notLoggedIn || isSubscribed
-            },
-            {
-              type: "button",
               title: settings.title,
               key: settings.id,
               icon: settings.icon.path,
               onClick: () => {
                 hashNavigate(settings.path);
               }
-            },
-            {
-              type: "button",
-              title: strings.helpAndSupport(),
-              icon: Documentation.path,
-              key: "help-and-support",
-              onClick: () => {
-                window.open("https://notesnook.com/help/", "_blank");
-              }
-            },
-            {
-              type: "button",
-              title: strings.login(),
-              icon: Login.path,
-              key: "login",
-              isHidden: !notLoggedIn,
-              onClick: () => hardNavigate("/login")
             },
             {
               type: "button",

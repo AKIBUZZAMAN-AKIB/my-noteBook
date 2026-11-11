@@ -728,10 +728,11 @@ export async function getFeaturesUsage(): Promise<FeatureUsage[]> {
  * official servers (cloud storage quota, upload size, SMS 2FA, Circle partner
  * codes, Monograph publishing/analytics) keep the account's real plan,
  * because those limits are enforced server-side and are not touched here.
+ * my-NoteBook: attachments are stored locally, so "fileSize" uses the highest
+ * tier as well (the browser's own storage quota is the real limit).
  */
 const SERVER_ENFORCED_FEATURES: string[] = [
   "storage",
-  "fileSize",
   "sms2FA",
   "notesnookCircle",
   "monographLinksAndEmbeds",

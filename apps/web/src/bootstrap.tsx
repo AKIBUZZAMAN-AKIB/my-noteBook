@@ -116,6 +116,18 @@ const sessionExpiryExceptions: Routes[] = [
 ];
 
 function getRoute(): RouteWithPath<AuthProps> | RouteWithPath {
+  // my-NoteBook is a local-only app: there are no accounts, plans or
+  // checkout pages, so every path opens the notes app directly.
+  if (!IS_TESTING) {
+    const current = getCurrentPath();
+    if (current !== "/" && !current.startsWith("/notes")) {
+      const isAppRoute = !routes[current as Routes] || current === "default";
+      if (!isAppRoute)
+        window.history.replaceState({}, "", makeURL("/", getCurrentHash()));
+    }
+    localStorage.setItem("skipInitiation", "true");
+    return fallbackRoute();
+  }
   let path = getCurrentPath() as Routes;
   // logger.info(`Getting route for path: ${path}`);
 
@@ -171,7 +183,7 @@ function isSessionExpired(path: Routes): RouteWithPath<AuthProps> | null {
 
 function checkPrerequisites() {
   if (!window.isSecureContext)
-    throw new Error("Please run Notesnook in a secure (https) context.");
+    throw new Error("Please run my-NoteBook in a secure (https) context.");
   if (!navigator.locks)
     throw new Error("Your browser does not support the Web Locks API.");
   if (!crypto.subtle)

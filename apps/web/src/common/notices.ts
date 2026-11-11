@@ -111,6 +111,7 @@ export async function shouldAddBackupNotice() {
 
 export async function shouldAddRecoveryKeyBackupNotice() {
   if (isIgnored("recoverykey")) return false;
+  if (!(await db.user.getUser())) return false;
 
   const recoveryKeyBackupDate = Config.get("recoveryKeyBackupDate", 0);
   if (!recoveryKeyBackupDate) return true;
@@ -118,8 +119,8 @@ export async function shouldAddRecoveryKeyBackupNotice() {
 }
 
 export async function shouldAddLoginNotice() {
-  const user = await db.user.getUser();
-  if (!user) return true;
+  // my-NoteBook is local-only: never nag the user to log in.
+  return false;
 }
 
 export async function shouldAddConfirmEmailNotice() {

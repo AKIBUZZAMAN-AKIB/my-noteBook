@@ -58,7 +58,6 @@ import { ConfirmDialog, showLogoutConfirmation } from "../dialogs/confirm";
 import { Home } from "../components/icons";
 import { MenuItem } from "@notesnook/ui";
 import { showFeatureNotAllowedToast } from "./toasts";
-import { UpgradeDialog } from "../dialogs/buy-dialog/upgrade-dialog";
 import { setToolbarPreset } from "./toolbar-config";
 import { useKeyStore } from "../interfaces/key-store";
 import { TaskScheduler } from "../utils/task-scheduler";
@@ -120,7 +119,7 @@ export async function createBackup(
   const encryptedBackups = !rescueMode && isLoggedIn && encryptBackups;
 
   const filename = sanitizeFilename(
-    `${formatDate(Date.now(), {
+    `my-NoteBook-backup-${formatDate(Date.now(), {
       type: "date-time",
       dateFormat: "YYYY-MM-DD",
       timeFormat: "24-hour"
@@ -262,7 +261,8 @@ export async function restoreBackupFile(backupFile: File) {
     );
 
     let skipAttachments = false;
-    if (!useUserStore.getState().isLoggedIn) {
+    // my-NoteBook: attachments can be restored without an account.
+    if (false as boolean) {
       let hasAttachments = false;
       for await (const entry of createUnzipIterator(backupFile)) {
         if (
@@ -545,9 +545,9 @@ export async function checkFeature<TId extends FeatureId>(
       ? idOrFeature
       : await isFeatureAvailable(idOrFeature, value);
   if (!result.isAllowed) {
-    type === "dialog"
-      ? await UpgradeDialog.show({ feature: result })
-      : showFeatureNotAllowedToast(result);
+    // my-NoteBook: no upgrade dialog, just explain the limit.
+    void type;
+    showFeatureNotAllowedToast(result);
     return false;
   }
   return true;

@@ -21,12 +21,10 @@ import React, { useEffect } from "react";
 import { useStore } from "./stores/app-store";
 import { useStore as useUserStore } from "./stores/user-store";
 import { useEditorStore } from "./stores/editor-store";
-import { useStore as useAnnouncementStore } from "./stores/announcement-store";
 import { useStore as useSettingStore } from "./stores/setting-store";
 import { scheduleBackups, scheduleFullBackups } from "./common/notices";
 import {
   handleInternalLink,
-  introduceFeatures,
   resetFeatures,
   scheduleExpiredNotesDeletion
 } from "./common";
@@ -37,8 +35,6 @@ import { registerKeyMap } from "./common/key-map";
 import { updateStatus, removeStatus, getStatus } from "./hooks/use-status";
 import { hashNavigate, navigate } from "./navigation";
 import { desktop } from "./common/desktop-bridge";
-import { FeatureDialog } from "./dialogs/feature-dialog";
-import { AnnouncementDialog } from "./dialogs/announcement-dialog";
 import { logger } from "./utils/logger";
 import { showToast } from "./utils/toast";
 import { strings } from "@notesnook/intl";
@@ -53,9 +49,6 @@ export default function AppEffects() {
   const initSettingStore = useSettingStore((store) => store.init);
   const setIsVaultCreated = useStore((store) => store.setIsVaultCreated);
   const initEditorStore = useEditorStore((store) => store.init);
-  const dialogAnnouncements = useAnnouncementStore(
-    (store) => store.dialogAnnouncements
-  );
 
   useEffect(
     function initializeApp() {
@@ -71,7 +64,7 @@ export default function AppEffects() {
         await initUser();
         // await resetNotices();
 
-        await FeatureDialog.show({ featureName: "highlights" });
+        // my-NoteBook: no "what's new" / promotional dialogs on startup.
         await scheduleBackups();
         await scheduleFullBackups();
         await scheduleExpiredNotesDeletion();
@@ -201,16 +194,7 @@ export default function AppEffects() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusMode]);
 
-  useEffect(() => {
-    introduceFeatures();
-  }, []);
-
-  useEffect(() => {
-    if (!dialogAnnouncements.length || IS_TESTING) return;
-    (async () => {
-      await AnnouncementDialog.show({ announcement: dialogAnnouncements[0] });
-    })();
-  }, [dialogAnnouncements]);
+  // my-NoteBook: feature introductions and server announcements are disabled.
 
   return <React.Fragment />;
 }
