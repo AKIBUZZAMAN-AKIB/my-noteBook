@@ -32,7 +32,8 @@ import {
   useSensor,
   useSensors,
   KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   DragOverlay,
   MeasuringStrategy
 } from "@dnd-kit/core";
@@ -43,7 +44,7 @@ import {
   useSortable,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CSS } from "@dnd-kit/utilities";
 import { createPortal } from "react-dom";
 import { getId } from "@notesnook/core";
@@ -67,7 +68,13 @@ import { checkFeature } from "../../../common";
 
 export function CustomizeToolbar() {
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    // mouse: start after a small move so clicks on the row buttons still work
+    useSensor(MouseSensor, { activationConstraint: { distance: 4 } }),
+    // touch: press & hold to pick an item up, so a normal swipe still
+    // scrolls the settings page instead of dragging something by accident
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 220, tolerance: 8 }
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates
     })
@@ -77,9 +84,16 @@ export function CustomizeToolbar() {
   const [currentPreset, setCurrentPreset] = useState<Preset>();
   const { setToolbarConfig } = useToolbarConfig();
   const customToolbarPreset = useIsFeatureAvailable("customToolbarPreset");
+  // when a drag converts a built-in preset into the custom one, the items
+  // (and their ids) must stay the same or the item being dragged is lost
+  const keepItemsRef = useRef(false);
 
   useEffect(() => {
     if (!currentPreset) return;
+    if (keepItemsRef.current) {
+      keepItemsRef.current = false;
+      return;
+    }
     const items = flatten(getPresetTools(currentPreset));
     items.push(createTrash());
     items.push(...flatten([getDisabledTools(items)]).slice(1));
@@ -176,6 +190,7 @@ export function CustomizeToolbar() {
         }}
         onDragStart={(event) => {
           if (currentPreset.id !== "custom") {
+            keepItemsRef.current = true;
             setCurrentPreset({
               ...getPreset("custom"),
               tools: getPresetTools(currentPreset)
@@ -203,6 +218,7 @@ export function CustomizeToolbar() {
           }
           setActiveItem(undefined);
         }}
+        onDragCancel={() => setActiveItem(undefined)}
         measuring={{
           droppable: { strategy: MeasuringStrategy.Always }
         }}
@@ -251,8 +267,8 @@ export function CustomizeToolbar() {
           {activeItem &&
             createPortal(
               <DragOverlay
-              // dropAnimation={dropAnimationConfig}
-              // modifiers={indicator ? [adjustTranslate] : undefined}
+                zIndex={10000}
+                dropAnimation={{ duration: 180, easing: "ease-out" }}
               >
                 <TreeNodeComponent overlay item={activeItem} />
               </DragOverlay>,
@@ -287,6 +303,7 @@ function TreeNodeComponent(props: TreeNodeComponentProps) {
     return (
       <SortableWrapper
         {...restProps}
+        activeItem={activeItem}
         item={item}
         draggable={isDraggable}
         onRemove={onRemoveGroup}
@@ -313,6 +330,7 @@ function TreeNodeComponent(props: TreeNodeComponentProps) {
   return (
     <SortableWrapper
       {...restProps}
+      activeItem={activeItem}
       item={item}
       draggable={isDraggable}
       onRemove={onRemoveItem}
@@ -327,6 +345,14 @@ function TreeNodeComponent(props: TreeNodeComponentProps) {
         ":last-of-type": { mb: 0 }
       }}
     >
+      {isDraggable ? (
+        <Icon
+          path={Icons.dragHandle}
+          size={16}
+          color="icon-secondary"
+          sx={{ mr: 1 }}
+        />
+      ) : null}
       {item.icon && (
         <Icon
           path={(Icons as Record<string, string>)[item.icon]}
@@ -356,31 +382,83 @@ function SortableWrapper(props: SortableWrapperProps) {
     onAdd,
     ...flexProps
   } = props;
-  const { attributes, listeners, setNodeRef, transform, transition } =
+  const { attributes, listeners, setNodeRef, transform, transition, isOver } =
     useSortable({ id: item.id });
-  const visibility =
-    !overlay && item.id === activeItem?.id ? "hidden" : "visible";
+  // the dragged item is collapsed out of the list while dragging, and it is
+  // dropped right after the item it is over: mark that spot with an accent
+  // line so the user can see where it will land
+  const isDropTarget = !overlay && !!activeItem && isOver;
 
   return (
     <Flex
       {...flexProps}
       id={overlay ? `overlay-${item.id}` : item.id}
       ref={setNodeRef}
+      data-drag-state={overlay ? "overlay" : isDropTarget ? "drop-target" : ""}
       sx={{
         pointerEvents: draggable ? "all" : "none",
         cursor: overlay ? "grabbing" : draggable ? "grab" : "unset",
-        visibility,
         transform: CSS.Transform.toString(transform),
         transition,
         justifyContent: "space-between",
+        border: "1px solid transparent",
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        WebkitTouchCallout: "none",
         ":hover #remove-item, :hover #add-item": { opacity: 1 },
-        ...sx
+        // no hover on touch screens: keep the row actions visible
+        "@media (hover: none)": {
+          "#remove-item, #add-item": { opacity: 1 }
+        },
+        position: "relative",
+        ...(draggable && !overlay && !activeItem
+          ? { ":hover": { borderColor: "border" } }
+          : {}),
+        ...sx,
+        ...(isDropTarget
+          ? {
+              borderColor: "accent",
+              bg: "color-mix(in srgb, var(--accent) 10%, var(--background-secondary))",
+              "::after": {
+                content: '""',
+                position: "absolute",
+                left: 0,
+                right: 0,
+                bottom: -5,
+                height: 3,
+                borderRadius: 3,
+                bg: "accent",
+                pointerEvents: "none"
+              }
+            }
+          : {}),
+        ...(overlay
+          ? {
+              // the item that follows the finger / mouse
+              ml: 0,
+              mb: 0,
+              bg: "background",
+              border: "1px solid var(--accent)",
+              borderRadius: "default",
+              boxShadow:
+                "0 10px 28px rgba(0, 0, 0, 0.22), 0 2px 6px rgba(0, 0, 0, 0.12)",
+              transform: "scale(1.02)",
+              "#remove-item, #add-item": { display: "none" }
+            }
+          : {})
       }}
     >
       <Flex
         {...listeners}
         {...attributes}
-        sx={{ alignItems: "center", flex: 1 }}
+        sx={{
+          alignItems: "center",
+          flex: 1,
+          minWidth: 0,
+          outline: "none",
+          // let the page scroll until a long-press picks the item up
+          touchAction: "manipulation"
+        }}
       >
         {children}
       </Flex>

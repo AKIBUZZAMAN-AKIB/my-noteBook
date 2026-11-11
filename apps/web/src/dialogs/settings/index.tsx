@@ -30,8 +30,10 @@ import {
   Loading,
   ShieldLock,
   ArrowLeft,
-  Close
+  Close,
+  ChevronDown
 } from "../../components/icons";
+import { Menu } from "../../hooks/use-menu";
 import useMobile from "../../hooks/use-mobile";
 import NavigationItem from "../../components/navigation-menu/navigation-item";
 import { FlexScrollContainer } from "../../components/scroll-container";
@@ -707,38 +709,132 @@ function SettingItem(props: { item: Setting }) {
 export function SelectComponent(props: Omit<DropdownSettingComponent, "type">) {
   const { onSelectionChanged, options } = props;
   const selectedOption = usePromise(() => props.selectedOption(), [props]);
+  const [picked, setPicked] = useState<string | number>();
+  const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // reset the optimistic value whenever the source value changes
+  const sourceValue =
+    selectedOption.status === "fulfilled" ? selectedOption.value : undefined;
+  useEffect(() => {
+    setPicked(undefined);
+  }, [sourceValue]);
+
+  const current = picked !== undefined ? picked : sourceValue;
+  const currentOption = options.find(
+    (o) => current !== undefined && String(o.value) === String(current)
+  );
+
+  // The native <select> rendered the browser's own (unstyled) option list.
+  // Use the app's menu instead so the list matches the rest of the app: a
+  // themed popup next to the field on desktop and a bottom sheet on phones.
+  function open() {
+    if (!buttonRef.current) return;
+    setIsOpen(true);
+    Menu.openMenu(
+      options.map((option) => ({
+        type: "button",
+        key: String(option.value),
+        title: option.title,
+        isDisabled: option.disabled,
+        isChecked: currentOption?.value === option.value,
+        onClick: () => {
+          setPicked(option.value);
+          onSelectionChanged(String(option.value));
+        }
+      })),
+      {
+        position: {
+          target: buttonRef.current,
+          isTargetAbsolute: true,
+          location: "below",
+          align: "end",
+          yOffset: 4
+        }
+      }
+    );
+  }
+
+  useEffect(() => {
+    if (!isOpen) return;
+    // the menu store has no close callback, so watch it to drop the open
+    // (accent) state of the field once the menu is dismissed
+    const interval = setInterval(() => {
+      if (!Menu.isOpen() || Menu.target() !== buttonRef.current) {
+        setIsOpen(false);
+      }
+    }, 150);
+    return () => clearInterval(interval);
+  }, [isOpen]);
 
   return (
-    <select
-      style={{
-        backgroundColor: "var(--background-secondary)",
-        outline: "none",
-        border: "1px solid var(--border-secondary)",
-        borderRadius: "5px",
-        color: "var(--paragraph)",
-        padding: "5px",
-        overflow: "hidden",
-        maxWidth: "100%",
-        minWidth: 0,
-        textOverflow: "ellipsis"
+    <Button
+      ref={buttonRef}
+      type="button"
+      variant="secondary"
+      data-test-id="settings-dropdown"
+      aria-haspopup="menu"
+      aria-expanded={isOpen}
+      title={currentOption?.title}
+      onClick={open}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+          e.preventDefault();
+          open();
+        }
       }}
-      value={
-        selectedOption.status === "fulfilled" ? selectedOption.value : undefined
-      }
-      onChange={(e) =>
-        onSelectionChanged((e.target as HTMLSelectElement).value)
-      }
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 1,
+        minWidth: 120,
+        maxWidth: "100%",
+        py: "6px",
+        pl: 2,
+        pr: 1,
+        bg: "background-secondary",
+        color: "paragraph",
+        border: "1px solid",
+        borderColor: isOpen ? "accent" : "border",
+        borderRadius: "default",
+        boxShadow: isOpen ? "0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent)" : "none",
+        transition: "border-color 150ms ease, box-shadow 150ms ease",
+        ":hover:not(:disabled)": {
+          borderColor: isOpen ? "accent" : "border-secondary",
+          bg: "hover"
+        },
+        ":focus-visible": {
+          outline: "none",
+          borderColor: "accent",
+          boxShadow: "0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent)"
+        }
+      }}
     >
-      {options.map((option) => (
-        <option
-          key={option.value}
-          value={option.value}
-          disabled={option.disabled}
-        >
-          {option.title}
-        </option>
-      ))}
-    </select>
+      <Text
+        as="span"
+        variant="body"
+        sx={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          minWidth: 0,
+          textAlign: "left",
+          color: "paragraph"
+        }}
+      >
+        {currentOption?.title ?? "\u00a0"}
+      </Text>
+      <ChevronDown
+        size={16}
+        color={isOpen ? "accent" : "icon"}
+        sx={{
+          flexShrink: 0,
+          transform: isOpen ? "rotate(180deg)" : "none",
+          transition: "transform 150ms ease"
+        }}
+      />
+    </Button>
   );
 }
 
