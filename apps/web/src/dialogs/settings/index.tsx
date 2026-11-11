@@ -40,8 +40,11 @@ import {
   ShieldLock,
   Sync,
   Inbox,
-  CircleEmpty
+  CircleEmpty,
+  ArrowLeft,
+  Close
 } from "../../components/icons";
+import useMobile from "../../hooks/use-mobile";
 import NavigationItem from "../../components/navigation-menu/navigation-item";
 import { FlexScrollContainer } from "../../components/scroll-container";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -219,6 +222,47 @@ export const SettingsDialog = DialogManager.register(function SettingsDialog(
       (g) => g.section === (props.activeSection || "profile")
     )
   );
+  const isMobile = useMobile();
+  // On phones the menu and the settings are shown as two separate screens
+  // (list -> detail), like a native settings app.
+  const [mobileScreen, setMobileScreen] = useState<"menu" | "section">(
+    props.activeSection ? "section" : "menu"
+  );
+  const [isSearching, setIsSearching] = useState(false);
+  const [route, setRoute] = useState<SectionKeys>(
+    props.activeSection || "profile"
+  );
+
+  const content = (
+    <FlexScrollContainer
+      id="settings-scrollbar"
+      style={{
+        display: "flex",
+        backgroundColor: "var(--background)",
+        flex: 1,
+        flexDirection: "column",
+        padding: isMobile ? 16 : 20,
+        gap: 20,
+        minHeight: "auto",
+        minWidth: 0,
+        overflow: "auto"
+      }}
+    >
+      {activeSettings.length > 0 ? (
+        activeSettings.map((group) => (
+          <SettingsGroupComponent key={group.key} item={group} />
+        ))
+      ) : (
+        <Text variant="body" sx={{ color: "paragraph-secondary" }}>
+          {strings.noResultsFound()}
+        </Text>
+      )}
+    </FlexScrollContainer>
+  );
+
+  const showMenu = !isMobile || mobileScreen === "menu";
+  const showContent =
+    !isMobile || mobileScreen === "section" || isSearching;
 
   return (
     <Dialog
@@ -226,56 +270,133 @@ export const SettingsDialog = DialogManager.register(function SettingsDialog(
       width={"968px"}
       onClose={() => props.onClose(false)}
       noScroll
-      sx={{ bg: "transparent" }}
+      sx={{ bg: isMobile ? "background" : "transparent" }}
     >
+      {isMobile ? (
+        <MobileSettingsHeader
+          title={
+            mobileScreen === "section"
+              ? findSection(route)?.title || strings.settings()
+              : strings.settings()
+          }
+          onBack={
+            mobileScreen === "section"
+              ? () => setMobileScreen("menu")
+              : undefined
+          }
+          onClose={() => props.onClose(false)}
+        />
+      ) : null}
       <Flex
         sx={{
-          height: "80vw",
+          height: isMobile ? "auto" : "80vw",
+          flex: isMobile ? 1 : undefined,
+          minHeight: 0,
+          flexDirection: isMobile ? "column" : "row",
           overflow: "hidden"
         }}
       >
-        <SettingsSideBar
-          activeSection={props.activeSection}
-          onNavigate={(settings) => {
-            const scrollbar = document.getElementById("settings-scrollbar");
-            if (scrollbar !== null) scrollbar.scrollTop = 0;
-            setActiveSettings(settings);
-          }}
-        />
-        <FlexScrollContainer
-          id="settings-scrollbar"
-          style={{
-            display: "flex",
-            backgroundColor: "var(--background)",
-            flex: 1,
-            flexDirection: "column",
-            padding: 20,
-            gap: 20,
-            minHeight: "auto",
-            overflow: "auto"
-          }}
-        >
-          {activeSettings.length > 0 ? (
-            activeSettings.map((group) => (
-              <SettingsGroupComponent item={group} />
-            ))
-          ) : (
-            <Text variant="body" sx={{ color: "paragraph-secondary" }}>
-              {strings.noResultsFound()}
-            </Text>
-          )}
-        </FlexScrollContainer>
+        {showMenu ? (
+          <SettingsSideBar
+            activeSection={route}
+            isMobile={isMobile}
+            isSearching={isSearching}
+            onSearchStateChange={setIsSearching}
+            onRouteChange={(section) => {
+              setRoute(section);
+              if (isMobile) setMobileScreen("section");
+            }}
+            onNavigate={(settings) => {
+              const scrollbar = document.getElementById("settings-scrollbar");
+              if (scrollbar !== null) scrollbar.scrollTop = 0;
+              setActiveSettings(settings);
+            }}
+          />
+        ) : null}
+        {showContent ? content : null}
       </Flex>
     </Dialog>
   );
 });
 
+function MobileSettingsHeader(props: {
+  title: string;
+  onBack?: () => void;
+  onClose: () => void;
+}) {
+  const { title, onBack, onClose } = props;
+  return (
+    <Flex
+      data-test-id="settings-mobile-header"
+      sx={{
+        alignItems: "center",
+        gap: 1,
+        px: 1,
+        minHeight: 52,
+        flexShrink: 0,
+        bg: "background",
+        borderBottom: "1px solid var(--separator)"
+      }}
+    >
+      {onBack ? (
+        <Button
+          variant="icon"
+          data-test-id="settings-back"
+          title={strings.back()}
+          aria-label={strings.back()}
+          onClick={onBack}
+          sx={{ p: 2, borderRadius: "default" }}
+        >
+          <ArrowLeft size={20} />
+        </Button>
+      ) : (
+        <span style={{ width: 8 }} />
+      )}
+      <Text
+        variant="heading"
+        sx={{
+          flex: 1,
+          minWidth: 0,
+          fontSize: "subheading",
+          color: "heading",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
+        }}
+      >
+        {title}
+      </Text>
+      <Button
+        variant="icon"
+        data-test-id="settings-close"
+        title={strings.close()}
+        aria-label={strings.close()}
+        onClick={onClose}
+        sx={{ p: 2, borderRadius: "default" }}
+      >
+        <Close size={20} />
+      </Button>
+    </Flex>
+  );
+}
+
 type SettingsSideBarProps = {
   onNavigate: (settings: SettingsGroup[]) => void;
+  onRouteChange?: (section: SectionKeys) => void;
+  onSearchStateChange?: (isSearching: boolean) => void;
   activeSection?: SectionKeys;
+  isMobile?: boolean;
+  isSearching?: boolean;
 };
 function SettingsSideBar(props: SettingsSideBarProps) {
-  const { onNavigate, activeSection } = props;
+  const {
+    onNavigate,
+    activeSection,
+    onRouteChange,
+    onSearchStateChange,
+    isMobile,
+    isSearching
+  } = props;
   const [route, setRoute] = useState<SectionKeys>(activeSection || "profile");
   useUserStore((store) => store.isLoggedIn);
 
@@ -290,8 +411,11 @@ function SettingsSideBar(props: SettingsSideBarProps) {
       id="settings-side-menu"
       className="theme-scope-navigationMenu"
       style={{
-        width: 240,
-        overflow: "auto",
+        width: isMobile ? "100%" : 240,
+        flex: isMobile && !isSearching ? 1 : undefined,
+        flexShrink: 0,
+        minHeight: isMobile && isSearching ? undefined : "auto",
+        overflow: isMobile && isSearching ? "visible" : "auto",
         backgroundColor: "var(--background)"
       }}
       data-test-id="settings-navigation-menu"
@@ -308,7 +432,7 @@ function SettingsSideBar(props: SettingsSideBarProps) {
           <Input
             id="search"
             name="search"
-            autoFocus
+            autoFocus={!isMobile}
             placeholder={strings.search()}
             data-test-id="settings-search"
             sx={{
@@ -319,6 +443,7 @@ function SettingsSideBar(props: SettingsSideBarProps) {
             }}
             onChange={(e) => {
               const query = e.target.value.toLowerCase().trim();
+              onSearchStateChange?.(!!query);
               if (!query)
                 return onNavigate(
                   SettingsGroups.filter((g) => g.section === route)
@@ -374,7 +499,9 @@ function SettingsSideBar(props: SettingsSideBarProps) {
               onNavigate(groups);
             }}
           />
-          {sectionGroups.map((group) => (
+          {isMobile && isSearching
+            ? null
+            : sectionGroups.map((group) => (
             <Flex
               key={group.key}
               sx={{ flexDirection: "column", mx: 1, gap: "small" }}
@@ -408,6 +535,7 @@ function SettingsSideBar(props: SettingsSideBarProps) {
                           )
                         );
                         setRoute(section.key);
+                        onRouteChange?.(section.key);
                       }}
                     />
                   )
@@ -520,10 +648,14 @@ function SettingItem(props: { item: Setting }) {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "start",
-          gap: 4
+          // on narrow screens the controls move below the title instead of
+          // being pushed out of the visible area
+          flexWrap: "wrap",
+          columnGap: 4,
+          rowGap: 2
         }}
       >
-        <Flex sx={{ flexDirection: "column", flex: 1 }}>
+        <Flex sx={{ flexDirection: "column", flex: "1 1 180px", minWidth: 0 }}>
           <Flex sx={{ alignItems: "center", gap: 1 }}>
             <Text
               variant={"body"}
@@ -555,9 +687,13 @@ function SettingItem(props: { item: Setting }) {
           sx={{
             alignItems: "center",
             justifyContent: "end",
+            flexWrap: "wrap",
             gap: 2,
+            maxWidth: "100%",
+            minWidth: 0,
+            ml: "auto",
             "& > label": { width: "auto" },
-            "& > *": { flexShrink: 0 }
+            "& > *": { flexShrink: 0, maxWidth: "100%" }
           }}
         >
           {components.map((component, index) => {
@@ -619,7 +755,7 @@ function SettingItem(props: { item: Setting }) {
                   <Input
                     type={"text"}
                     defaultValue={component.defaultValue()}
-                    sx={{ width: 250, mr: 1 }}
+                    sx={{ width: 250, maxWidth: "100%", mr: 1 }}
                     onChange={debounce(
                       (e) => component.onChange(e.target.value),
                       500
@@ -662,7 +798,10 @@ export function SelectComponent(props: Omit<DropdownSettingComponent, "type">) {
         borderRadius: "5px",
         color: "var(--paragraph)",
         padding: "5px",
-        overflow: "hidden"
+        overflow: "hidden",
+        maxWidth: "100%",
+        minWidth: 0,
+        textOverflow: "ellipsis"
       }}
       value={
         selectedOption.status === "fulfilled" ? selectedOption.value : undefined
