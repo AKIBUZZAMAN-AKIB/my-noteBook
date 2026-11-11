@@ -1,73 +1,50 @@
-> **About this fork (my-noteBook):** This is a personal fork of [Notesnook](https://github.com/streetwriters/notesnook) by [Streetwriters](https://github.com/streetwriters), based on web v3.4.13. It has one change: in `packages/common/src/utils/is-feature-available.ts`, client-side feature gates are evaluated as the highest plan, so every local/offline feature is available in a self-hosted build. Limits enforced by Notesnook's servers (cloud storage quota, upload size, SMS 2FA, Circle partner codes, Monograph links/embeds and analytics) are unchanged and still follow the account's real plan. All credit for Notesnook goes to Streetwriters; the project remains licensed under GPL-3.0 (see [LICENSE](./LICENSE)).
-
 <p align="center">
-<img style="align:center;" src="./resources/icon.png" alt="Notesnook Logo" width="100" />
+<img src="./apps/web/public/android-chrome-512x512.png" alt="my-NoteBook logo" width="100" />
 </p>
 
-<h1 align="center">Notesnook</h1>
-<h3 align="center">An end-to-end encrypted note taking alternative to Evernote.</h3>
-<p align="center">
-<a href="https://notesnook.com/">Website</a> | <a href="https://notesnook.com/about">About us</a> | <a href="https://notesnook.com/roadmap">Roadmap</a> | <a href="https://notesnook.com/downloads">Downloads</a> | <a href="https://twitter.com/@notesnook">Twitter</a> | <a href="https://discord.gg/5davZnhw3V">Discord</a>
-</p>
+<h1 align="center">my-NoteBook</h1>
+<h3 align="center">A private, encrypted, local-only note taking app for the web.</h3>
 
 ## Overview
 
-Notesnook is a free (as in speech) & open-source note-taking app focused on user privacy & ease of use. To ensure zero knowledge principles, Notesnook encrypts everything on your device using `XChaCha20-Poly1305` & `Argon2`.
+my-NoteBook keeps your notes only on your own device. There is no account, no login, no sync server and no paid plan: the app opens straight to your notes.
 
-Notesnook is our **proof** that privacy does _not_ (always) have to come at the cost of convenience. We aim to provide users peace of mind & 100% confidence that their notes are safe and secure. The decision to go fully open source is one of the most crucial steps towards that.
+- Notes are stored in an encrypted SQLite database inside the browser (OPFS, with IndexedDB as fallback).
+- Attachments and images are encrypted with a per-device key and stored in IndexedDB.
+- Notebooks, tags, colors, reminders, the rich text editor, themes, app lock, vault, and backup/restore (including attachments) all work offline.
+- The interface is tuned for phones: full-screen Settings, attachment manager, and menus that always stay on screen.
 
-This repository contains all the code required to build & use the Notesnook web, desktop & mobile clients. If you are looking for a full feature list or screenshots, please check the [website](https://notesnook.com/).
+Because everything stays in the browser, each device (and each web address the app is served from) has its own data. Use **Settings → Backup & export** to move notes between devices.
 
-## Developer guide
+## Run it locally
 
-### Technologies & languages
+Requirements: Node.js 20+ and npm.
 
-Notesnook is built using the following technologies:
+```sh
+npm install
+npm run bootstrap -- --scope=web
+npm run start:web
+```
 
-1. JavaScript/Typescript — this repo is in a hybrid state. A lot of the newer code is being written in Typescript & the old code is slowly being ported over.
-2. React — the whole front-end across all platforms is built using React.
-3. React Native — For mobile apps we are using React Native
-4. Electron — For desktop app
-5. NPM — listed here because we **don't** use Yarn or PNPM or XYZ across any of our projects.
+Production build (output in `apps/web/build`):
 
-> **Note: Each project in the monorepo contains its own architecture details which you can refer to.**
+```sh
+npm run build:web
+```
 
-### Monorepo structure
+The build is a static site and can be served by any static file server.
 
-| Name                       | Path                                               | Description                                                          |
-| -------------------------- | -------------------------------------------------- | -------------------------------------------------------------------- |
-| `@notesnook/web`           | [/apps/web](/apps/web)                             | Web client                                                           |
-| `@notesnook/desktop`       | [/apps/desktop](/apps/desktop)                     | Desktop client                                                       |
-| `@notesnook/mobile`        | [/apps/mobile](/apps/mobile)                       | Android/iOS clients                                                  |
-| `@notesnook/web-clipper`   | [/extensions/web-clipper](/extensions/web-clipper) | Web clipper                                                          |
-| `@notesnook/core`          | [/packages/core](/packages/core)                   | Shared core between all platforms                                    |
-| `@notesnook/crypto`        | [/packages/crypto](/packages/crypto)               | Cryptography library wrapper around libsodium                        |
-| `@notesnook/clipper`       | [/packages/clipper](/packages/clipper)             | Web clipper core handling everything related to actual page clipping |
-| `@notesnook/editor`        | [/packages/editor](/packages/editor)               | Notesnook editor + all extensions                                    |
-| `@notesnook/editor-mobile` | [/packages/editor-mobile](/packages/editor-mobile) | A very thin wrapper around `@notesnook/editor` for mobile clients    |
-| `@notesnook/logger`        | [/packages/logger](/packages/logger)               | Simple & pluggable logger                                            |
-| `@notesnook/sodium`        | [/packages/sodium](/packages/sodium)               | Wrapper around libsodium to support Node.js & Browser                |
-| `@notesnook/streamable-fs` | [/packages/streamable-fs](/packages/streamable-fs) | Streaming interface around an IndexedDB based file system            |
-| `@notesnook/theme`         | [/packages/theme](/packages/theme)                 | The core theme used in web & desktop clients                         |
+## Repository layout
 
-### Contributing guidelines
+| Path                                   | Description                         |
+| -------------------------------------- | ----------------------------------- |
+| [/apps/web](/apps/web)                 | Web app                             |
+| [/packages/core](/packages/core)       | Database, storage and backup logic  |
+| [/packages/editor](/packages/editor)   | Rich text editor                    |
+| [/packages/theme](/packages/theme)     | Themes                              |
+| [/packages/intl](/packages/intl)       | UI strings and translations         |
+| [/packages/crypto](/packages/crypto)   | Encryption                          |
 
-If you are interested in contributing to Notesnook, I highly recommend checking out the [contributing guidelines](/CONTRIBUTING.md). You'll find all the relevant information such as [style guideline](/CONTRIBUTING.md#style-guidelines), [how to make a PR](/CONTRIBUTING.md#opening--submitting-a-pull-request), [how to commit](/CONTRIBUTING.md#commit-guidelines) etc., there.
+## License
 
-### Support & help
-
-You can reach out to us via:
-
-1. [Email](mailto:support@streetwriters.co)
-2. [Discord](https://discord.gg/5davZnhw3V)
-3. [Twitter](https://twitter.com/notesnook)
-4. [Create an issue](https://github.com/streetwriters/notesnook/issues/new)
-
-We take all queries, issues and bug reports that you might have. Feel free to ask.
-
-## Additional Resources
-
-- [Migrating & Importing your data from other apps — Importer](https://notesnook.com/help/importing-notes)
-- [Privacy policy](https://notesnook.com/privacy) & [Terms of service](https://notesnook.com/terms)
-- [Verify Notesnook encryption claims yourself — Vericrypt](https://vericrypt.notesnook.com/)
-- [Why Notesnook requires an email address?](https://blog.notesnook.com/why-notesnook-requires-an-email-address/)
+my-NoteBook is a modified version of [Notesnook](https://github.com/streetwriters/notesnook) by Streetwriters (Private) Limited and is licensed under the [GNU GPL v3](./LICENSE).
