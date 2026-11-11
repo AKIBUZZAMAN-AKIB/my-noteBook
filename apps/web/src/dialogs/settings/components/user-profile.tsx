@@ -129,7 +129,7 @@ export function UserProfile({ minimal }: Props) {
         <Flex sx={{ flexDirection: "column", minWidth: 0 }}>
           <Text variant={minimal ? "body" : "subtitle"}>my-NoteBook</Text>
           <Text variant={"subBody"}>
-            Your notes are saved only on this device, encrypted in this browser.
+            Your notes are saved encrypted.
           </Text>
         </Flex>
       </Flex>

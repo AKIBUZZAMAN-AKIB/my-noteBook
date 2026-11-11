@@ -29,7 +29,7 @@ import Config from "../../utils/config";
 // manages data stored on this device.
 const DELETE_ALL_DATA_TITLE = "Delete all data";
 const DELETE_ALL_DATA_DESC =
-  "Permanently delete all notes, notebooks, tags, reminders, attachments and settings saved on this device. This cannot be undone, so create a backup first if you want to keep anything.";
+  "Permanently delete all your notes, notebooks, tags, reminders, attachments and settings. This cannot be undone, so create a backup first if you want to keep anything.";
 
 export const ProfileSettings: SettingsGroup[] = [
   {
