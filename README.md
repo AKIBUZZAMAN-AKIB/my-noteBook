@@ -1,3 +1,5 @@
+> **About this fork (my-noteBook):** This is a personal fork of [Notesnook](https://github.com/streetwriters/notesnook) by [Streetwriters](https://github.com/streetwriters), based on web v3.4.13. It has one change: in `packages/common/src/utils/is-feature-available.ts`, client-side feature gates are evaluated as the highest plan, so every local/offline feature is available in a self-hosted build. Limits enforced by Notesnook's servers (cloud storage quota, upload size, SMS 2FA, Circle partner codes, Monograph links/embeds and analytics) are unchanged and still follow the account's real plan. All credit for Notesnook goes to Streetwriters; the project remains licensed under GPL-3.0 (see [LICENSE](./LICENSE)).
+
 <p align="center">
 <img style="align:center;" src="./resources/icon.png" alt="Notesnook Logo" width="100" />
 </p>

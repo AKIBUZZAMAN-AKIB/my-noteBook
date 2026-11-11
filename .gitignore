@@ -13,3 +13,12 @@ node_modules.backup
 .nx
 /*.patch
 .taskcache
+
+# Local logs, environment files and secrets (never commit)
+*.log
+.env
+.env.*
+!.env.example
+.secrets/
+*.pem
+*.key
