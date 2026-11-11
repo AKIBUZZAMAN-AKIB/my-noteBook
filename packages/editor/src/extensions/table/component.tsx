@@ -210,6 +210,7 @@ function TableRowToolbar(props: TableToolbarProps) {
         rowToolsRef.current.style.left = `${pos.left}px`;
         rowToolsRef.current.style.right = `unset`;
       }
+      keepInsideEditor(rowToolsRef.current, table.current);
     }
 
     editor.on("selectionUpdate", onSelectionUpdate);
@@ -234,6 +235,10 @@ function TableRowToolbar(props: TableToolbarProps) {
         flexDirection: "column",
         opacity: 0.4,
         ":hover": {
+          opacity: 1
+        },
+        // touch screens have no hover, so a faded toolbar would stay faded
+        "@media (hover: none)": {
           opacity: 1
         }
       }}
@@ -285,6 +290,7 @@ function TableColumnToolbar(props: TableToolbarProps) {
 
       columnToolsRef.current.style.left = `${pos.left - scrollLeft}px`;
       columnToolsRef.current.style.top = `${pos.top}px`;
+      keepInsideEditor(columnToolsRef.current, table.current);
     }
 
     const scrollContainer = table?.current?.parentElement;
@@ -313,6 +319,10 @@ function TableColumnToolbar(props: TableToolbarProps) {
         opacity: 0.4,
         ":hover": {
           opacity: 1
+        },
+        // touch screens have no hover, so a faded toolbar would stay faded
+        "@media (hover: none)": {
+          opacity: 1
         }
       }}
     >
@@ -330,4 +340,31 @@ function TableColumnToolbar(props: TableToolbarProps) {
       />
     </Flex>
   );
+}
+
+/**
+ * On narrow (phone) screens the editor has almost no side padding, so the
+ * row toolbar (placed to the left of the row) and the column toolbar (placed
+ * above a column of a horizontally scrolled table) ended up partly or fully
+ * outside the visible area where they couldn't be tapped. Nudge the toolbar
+ * back so it always stays inside the editor's visible width.
+ */
+function keepInsideEditor(element: HTMLElement, table: HTMLElement) {
+  const container =
+    (table.closest(".ProseMirror") as HTMLElement | null)?.parentElement ||
+    document.documentElement;
+  const bounds = container.getBoundingClientRect();
+  const minLeft = Math.max(bounds.left, 0) + 2;
+  const maxRight = Math.min(bounds.right, window.innerWidth) - 2;
+  const rect = element.getBoundingClientRect();
+  if (!rect.width) return;
+  let shift = 0;
+  if (rect.left < minLeft) shift = minLeft - rect.left;
+  else if (rect.right > maxRight) shift = maxRight - rect.right;
+  if (!shift) return;
+  if (element.style.left && element.style.left !== "unset") {
+    element.style.left = `${parseFloat(element.style.left) + shift}px`;
+  } else if (element.style.right && element.style.right !== "unset") {
+    element.style.right = `${parseFloat(element.style.right) - shift}px`;
+  }
 }
