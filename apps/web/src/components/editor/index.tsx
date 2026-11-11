@@ -618,15 +618,6 @@ export function Editor(props: EditorProps) {
           }
         }}
         onInsertAttachment={async (type) => {
-          if (!useUserStore.getState().isLoggedIn) {
-            ConfirmDialog.show({
-              title: strings.notLoggedIn(),
-              message: strings.loginToUploadAttachments(),
-              positiveButtonText: strings.okay()
-            });
-            return;
-          }
-
           const mime = type === "file" ? "*/*" : "image/*";
           await insertAttachments(mime, (attachments) => {
             const editor = useEditorManager.getState().getEditor(id)?.editor;

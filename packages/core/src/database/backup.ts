@@ -359,11 +359,14 @@ export default class Backup {
     }
 
     const total = await this.db.attachments.all.count();
-    if (total > 0 && user && user.attachmentsKey) {
+    // local-only (no user): attachments use a per-device key, which is
+    // written unencrypted (backups can only be encrypted with an account).
+    if (total > 0 && (!user || user.attachmentsKey)) {
       yield {
         type: "file",
         path: `attachments/.attachments_key`,
-        data: backupState.encrypt
+        data:
+          backupState.encrypt && user
           ? JSON.stringify(user.attachmentsKey)
           : JSON.stringify((await this.db.user.getAttachmentsKey()) || {})
       };
@@ -532,7 +535,7 @@ export default class Backup {
     const { version = 0 } = backup;
     if (version > CURRENT_DATABASE_VERSION)
       throw new Error(
-        "This backup was made from a newer version of Notesnook. Cannot migrate."
+        "This backup was made from a newer version of the app. Cannot migrate."
       );
 
     switch (version) {

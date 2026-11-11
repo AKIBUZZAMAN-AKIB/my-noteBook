@@ -21,6 +21,7 @@ import { sql } from "@streetwriters/kysely";
 import { LazyDatabaseAccessor, RawDatabaseSchema } from "./index.js";
 import { Token } from "../api/token-manager.js";
 import { User } from "../types.js";
+import { SerializedKey } from "@notesnook/crypto";
 
 interface KV {
   v: number;
@@ -37,6 +38,11 @@ interface KV {
    * Revision of the user when the current master key was set.
    */
   masterKeyRevision: number;
+  /**
+   * Attachments encryption key used when there is no logged in user
+   * (local-only builds). The key lives inside the encrypted database.
+   */
+  localAttachmentsKey: SerializedKey;
 }
 
 export const KEYS: (keyof KV)[] = [

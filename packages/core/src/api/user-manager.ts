@@ -713,6 +713,16 @@ class UserManager {
   }
 
   async getAttachmentsKey() {
+    // Local-only (no account): keep a per-device attachments key inside the
+    // encrypted database so files can be attached without logging in.
+    if (!(await this.getUser())) {
+      let localKey = await this.db.kv().read("localAttachmentsKey");
+      if (!localKey) {
+        localKey = await this.db.crypto().generateRandomKey();
+        await this.db.kv().write("localAttachmentsKey", localKey);
+      }
+      return localKey;
+    }
     return this.getUserKey("attachmentsKey", {
       generateKey: () => this.db.crypto().generateRandomKey(),
       errorContext: "attachments encryption key"

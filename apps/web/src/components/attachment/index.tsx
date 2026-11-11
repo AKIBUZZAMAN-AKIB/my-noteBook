@@ -17,13 +17,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Box, Checkbox, Flex, Label, Text } from "@theme-ui/components";
+import { Box, Button, Checkbox, Flex, Label, Text } from "@theme-ui/components";
 import { formatBytes } from "@notesnook/common";
 import {
   AttachmentError,
-  Checkmark,
   DeleteForver,
-  DoubleCheckmark,
   Download,
   FileDocument,
   FileGeneral,
@@ -33,6 +31,7 @@ import {
   FileWebClip,
   Icon,
   Loading,
+  MoreVertical,
   PasswordInvisible,
   References,
   Rename,
@@ -96,6 +95,8 @@ type AttachmentProps = {
   isSelected?: boolean;
   onSelected?: () => void;
   compact?: boolean;
+  /** phone layout: name + size + a menu button, bigger touch targets */
+  mobile?: boolean;
   style?: React.CSSProperties;
   rowRef?: React.Ref<HTMLTableRowElement>;
 };
@@ -104,6 +105,7 @@ export function Attachment({
   isSelected,
   onSelected,
   compact,
+  mobile,
   rowRef,
   style
 }: AttachmentProps) {
@@ -137,7 +139,7 @@ export function Attachment({
   return (
     <Box
       as="tr"
-      sx={{ height: 25, ":hover": { bg: "hover" } }}
+      sx={{ height: mobile ? 48 : 25, ":hover": { bg: "hover" } }}
       onContextMenu={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -165,6 +167,7 @@ export function Attachment({
               }}
               checked={isSelected}
               onChange={onSelected}
+              onClick={(e) => e.stopPropagation()}
             />
           </Label>
         </td>
@@ -173,7 +176,8 @@ export function Attachment({
         <Flex
           sx={{
             alignItems: "center",
-            ml: 2
+            ml: 2,
+            minWidth: 0
           }}
         >
           {status ? (
@@ -197,6 +201,7 @@ export function Attachment({
             variant="body"
             sx={{
               ml: 1,
+              minWidth: 0,
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis"
@@ -206,22 +211,6 @@ export function Attachment({
           </Text>
         </Flex>
       </td>
-      <Text as="td" variant="body">
-        {item.dateUploaded ? (
-          <DoubleCheckmark
-            sx={{ flexShrink: 0 }}
-            color={"accent"}
-            size={16}
-            title={strings.uploaded()}
-          />
-        ) : (
-          <Checkmark
-            sx={{ flexShrink: 0 }}
-            size={16}
-            title={strings.waitingForUpload()}
-          />
-        )}
-      </Text>
       <Text
         as="td"
         variant="body"
@@ -240,12 +229,28 @@ export function Attachment({
           formatBytes(item.size, compact ? 1 : 2)
         )}
       </Text>
-      {!compact && (
+      {!compact && !mobile && (
         <Text as="td" variant="body">
-          {item.dateUploaded
-            ? getFormattedDate(item.dateUploaded, "date")
+          {item.dateCreated || item.dateUploaded
+            ? getFormattedDate(item.dateCreated || item.dateUploaded!, "date")
             : "-"}
         </Text>
+      )}
+      {mobile && (
+        <td style={{ textAlign: "right" }}>
+          <Button
+            variant="icon"
+            title={strings.more()}
+            aria-label="More actions"
+            onClick={(e) => {
+              e.stopPropagation();
+              Menu.openMenu(AttachmentMenuItems(item, status));
+            }}
+            sx={{ p: 2, borderRadius: "default" }}
+          >
+            <MoreVertical size={18} />
+          </Button>
+        </td>
       )}
     </Box>
   );
@@ -324,16 +329,6 @@ const AttachmentMenuItems: (
     },
     {
       type: "button",
-      key: "recheck",
-      title: strings.fileCheck(),
-      icon: DoubleCheckmark.path,
-      isDisabled: !attachment.dateUploaded,
-      onClick: async () => {
-        await store.recheck([attachment.id]);
-      }
-    },
-    {
-      type: "button",
       key: "rename",
       title: strings.rename(),
       icon: Rename.path,
@@ -368,7 +363,7 @@ const AttachmentMenuItems: (
       title:
         status?.type === "upload"
           ? strings.network.cancelUpload()
-          : strings.network.reupload(),
+          : "Replace file",
       icon: Reupload.path,
       onClick: async () => {
         const isDownloading = status?.type === "upload";

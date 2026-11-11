@@ -66,7 +66,6 @@ import { TimeFormat } from "@notesnook/core";
 import { EDITOR_ZOOM } from "./common";
 import { ScrollContainer } from "@notesnook/ui";
 import { showFeatureNotAllowedToast } from "../../common/toasts";
-import { UpgradeDialog } from "../../dialogs/buy-dialog/upgrade-dialog";
 import { ConfirmDialog } from "../../dialogs/confirm";
 import { strings } from "@notesnook/intl";
 import { handleInternalLink } from "../../common";
@@ -208,30 +207,19 @@ function TipTap(props: TipTapProps) {
       callout: !!features?.callout?.isAllowed,
       outlineList: !!features?.outlineList?.isAllowed,
       taskList: !!features?.taskList?.isAllowed,
-      insertAttachment: !!useUserStore.getState().isLoggedIn,
+      insertAttachment: true, // my-NoteBook: attachments work locally
       exportTableAsCsv: !!features?.exportTableAsCsv?.isAllowed,
       importCsvToTable: !!features?.importCsvToTable?.isAllowed
     },
     onPermissionDenied: (claim, silent) => {
-      if (claim === "insertAttachment") {
-        ConfirmDialog.show({
-          title: strings.notLoggedIn(),
-          message: strings.loginToUploadAttachments(),
-          positiveButtonText: strings.okay()
-        });
-        return;
-      }
-
+      if (claim === "insertAttachment") return;
       if (silent) {
         console.log(features, features?.[claim]);
         if (features?.[claim]) showFeatureNotAllowedToast(features[claim]);
         return;
       }
 
-      if (features)
-        UpgradeDialog.show({
-          feature: features[claim]
-        });
+      if (features?.[claim]) showFeatureNotAllowedToast(features[claim]);
     }
   });
 
